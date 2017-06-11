@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/main_navigation_pomodoro"
+        android:icon="@drawable/ic_tomato"
+        android:title="@string/navigation_title_pomodoro" />
+
+    <item
+        android:id="@+id/main_navigation_records"
+        android:icon="@drawable/ic_records"
+        android:title="@string/navigation_title_records" />
+
+</menu>

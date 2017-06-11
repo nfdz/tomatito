@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Tomatito</string>
+
+    <string name="navigation_title_pomodoro">Pomodoro</string>
+    <string name="navigation_title_records">Records</string>
+
+    <string name="action_settings">Settings</string>
+
+</resources>
