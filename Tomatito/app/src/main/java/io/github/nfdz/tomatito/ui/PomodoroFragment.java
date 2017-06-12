@@ -167,8 +167,8 @@ public class PomodoroFragment extends Fragment implements SharedPreferences.OnSh
                     mPomodoros.setText(pomodoroCounter + "/" + pomodorosToLongBreak);
                     mBreaks.setText(breakCounter + "/" + (pomodorosToLongBreak - 1));
                     setProgressBarColor(ContextCompat.getColor(getContext(), R.color.progressBarWorking));
-                    int progress = (int) ((thisPomodoroTime/pomodoroTime) * 100);
-                    mProgressBar.setProgress(50);
+                    int progress = (int) (((thisPomodoroTime + 0.0)/pomodoroTime) * 100);
+                    mProgressBar.setProgress(progress);
 
                     break;
                 } else if (elapsedTime < pomodoroEnd + shortBreakTime) {
@@ -183,8 +183,8 @@ public class PomodoroFragment extends Fragment implements SharedPreferences.OnSh
                         mPomodoros.setText(pomodoroCounter + "/" + pomodorosToLongBreak);
                         mBreaks.setText(currentBreak + "/" + (pomodorosToLongBreak - 1));
                         setProgressBarColor(ContextCompat.getColor(getContext(), R.color.progressBarBreak));
-                        int progress = (int) ((breakTime/shortBreakTime) * 100);
-                        mProgressBar.setProgress(50);
+                        int progress = (int) (((breakTime + 0.0)/shortBreakTime) * 100);
+                        mProgressBar.setProgress(progress);
                     } else {
                         // long break, do nothing because long break is handle outside for
                     }
@@ -202,8 +202,8 @@ public class PomodoroFragment extends Fragment implements SharedPreferences.OnSh
                 mPomodoros.setText(pomodorosToLongBreak + "/" + pomodorosToLongBreak);
                 mBreaks.setText((pomodorosToLongBreak - 1) + "/" + (pomodorosToLongBreak - 1));
                 setProgressBarColor(ContextCompat.getColor(getContext(), R.color.progressBarBreak));
-                int progress = (int) ((breakTime/longBreakTime) * 100);
-                mProgressBar.setProgress(50);
+                int progress = (int) (((breakTime + 0.0)/longBreakTime) * 100);
+                mProgressBar.setProgress(progress);
             }
 
             // reschedule this runnable
