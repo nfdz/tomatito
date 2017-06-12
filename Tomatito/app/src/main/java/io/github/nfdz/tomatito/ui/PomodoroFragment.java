@@ -25,13 +25,13 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.github.nfdz.tomatito.R;
 import io.github.nfdz.tomatito.data.PreferencesUtils;
-import timber.log.Timber;
 
 public class PomodoroFragment extends Fragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private final static long TIMER_REFRESH_RATE_MILLIS = 1000;
 
     @BindView(R.id.tv_pomodoro_time) TextView mPomodoroTime;
+    @BindView(R.id.tv_pomodoro_total_time) TextView mPomodoroTotalTime;
     @BindView(R.id.tv_pomodoros_value) TextView mPomodoros;
     @BindView(R.id.tv_breaks_value) TextView mBreaks;
     @BindView(R.id.fab_start_pomodoro) FloatingActionButton mStartButton;
@@ -90,16 +90,17 @@ public class PomodoroFragment extends Fragment implements SharedPreferences.OnSh
     private void updateCurrentPomodoro(long currentPomodoro) {
         boolean validPomodoro = currentPomodoro != PreferencesUtils.CURRENT_POMODORO_DEFAULT;
         int pomodorosToLongBreak = PreferencesUtils.getPomodorosToLongBreak(getContext());
+        long pomodoroTime = PreferencesUtils.getPomodoroTime(getContext());
         if (validPomodoro) {
             mStopButton.setVisibility(View.VISIBLE);
             mStartButton.setVisibility(View.GONE);
             if (mTimerUpdater != null) mTimerHandler.removeCallbacks(mTimerUpdater);
-            initPomodoro(pomodorosToLongBreak, currentPomodoro);
+            initPomodoro(pomodorosToLongBreak, currentPomodoro, pomodoroTime);
         } else {
             mStartButton.setVisibility(View.VISIBLE);
             mStopButton.setVisibility(View.GONE);
             if (mTimerUpdater != null) mTimerHandler.removeCallbacks(mTimerUpdater);
-            clearPomodoro(pomodorosToLongBreak);
+            clearPomodoro(pomodorosToLongBreak, pomodoroTime);
         }
     }
 
@@ -114,17 +115,17 @@ public class PomodoroFragment extends Fragment implements SharedPreferences.OnSh
         PreferencesUtils.deleteCurrentPomodoro(getContext());
     }
 
-    private void initPomodoro(int pomodorosToLongBreak, long currentPomodoro) {
-        long pomodoroTime = PreferencesUtils.getPomodoroTime(getContext());
+    private void initPomodoro(int pomodorosToLongBreak, long currentPomodoro, long pomodoroTime) {
         long shortBreakTime = PreferencesUtils.getShortBreakTime(getContext());
         long longBreakTime = PreferencesUtils.getLongBreakTime(getContext());
         mTimerUpdater = new TimerUpdater(pomodoroTime, shortBreakTime, longBreakTime, currentPomodoro, pomodorosToLongBreak);
         mTimerHandler.post(mTimerUpdater);
     }
 
-    private void clearPomodoro(int pomodorosToLongBreak) {
+    private void clearPomodoro(int pomodorosToLongBreak, long pomodoroTime) {
         mProgressBar.setProgress(0);
         mPomodoroTime.setText("00:00");
+        mPomodoroTotalTime.setText("/ " + getTimerTextFor(pomodoroTime));
         mPomodoros.setText("0/" + pomodorosToLongBreak);
         mBreaks.setText("0/" + (pomodorosToLongBreak - 1));
     }
@@ -169,7 +170,7 @@ public class PomodoroFragment extends Fragment implements SharedPreferences.OnSh
                     setProgressBarColor(ContextCompat.getColor(getContext(), R.color.progressBarWorking));
                     int progress = (int) (((thisPomodoroTime + 0.0)/pomodoroTime) * 100);
                     mProgressBar.setProgress(progress);
-
+                    mPomodoroTotalTime.setText("/ " + getTimerTextFor(pomodoroTime));
                     break;
                 } else if (elapsedTime < pomodoroEnd + shortBreakTime) {
                     // it is on a break
@@ -185,14 +186,13 @@ public class PomodoroFragment extends Fragment implements SharedPreferences.OnSh
                         setProgressBarColor(ContextCompat.getColor(getContext(), R.color.progressBarBreak));
                         int progress = (int) (((breakTime + 0.0)/shortBreakTime) * 100);
                         mProgressBar.setProgress(progress);
+                        mPomodoroTotalTime.setText("/ " + getTimerTextFor(shortBreakTime));
+                        break;
                     } else {
                         // long break, do nothing because long break is handle outside for
                     }
-
-                    break;
                 }
             }
-
             if (pomodoroCounter > pomodorosToLongBreak) {
                 // long break
                 long breakStart = pomodoroTime * pomodorosToLongBreak + shortBreakTime * (pomodorosToLongBreak - 1);
@@ -204,6 +204,7 @@ public class PomodoroFragment extends Fragment implements SharedPreferences.OnSh
                 setProgressBarColor(ContextCompat.getColor(getContext(), R.color.progressBarBreak));
                 int progress = (int) (((breakTime + 0.0)/longBreakTime) * 100);
                 mProgressBar.setProgress(progress);
+                mPomodoroTotalTime.setText("/ " + getTimerTextFor(longBreakTime));
             }
 
             // reschedule this runnable

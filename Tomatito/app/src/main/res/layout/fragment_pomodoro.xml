@@ -89,6 +89,7 @@
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/ic_start"
         android:layout_margin="16dp"
+        android:backgroundTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
@@ -100,5 +101,13 @@
         android:layout_margin="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_pomodoro_total_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="/ 00:00"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_pomodoro_time"
+        app:layout_constraintLeft_toRightOf="@+id/tv_pomodoro_time" />
 
 </android.support.constraint.ConstraintLayout>
