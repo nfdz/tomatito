@@ -7,4 +7,7 @@
 
     <color name="white">#FFFFFF</color>
 
+    <color name="progressBarWorking">@color/colorPrimary</color>
+    <color name="progressBarBreak">@color/colorAccent</color>
+
 </resources>

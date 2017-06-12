@@ -38,18 +38,21 @@ public class PreferencesUtils {
 
     public static long getPomodoroTime(Context context) {
         // TODO
-        return TimeUnit.MINUTES.toMillis(25);
+        //return TimeUnit.MINUTES.toMillis(25);
+        return TimeUnit.MINUTES.toMillis(1);
     }
 
     public static long getShortBreakTime(Context context) {
         // TODO
-        return TimeUnit.MINUTES.toMillis(5);
+        //return TimeUnit.MINUTES.toMillis(5);
+        return TimeUnit.MINUTES.toMillis(1);
     }
 
 
     public static long getLongBreakTime(Context context) {
         // TODO
-        return TimeUnit.MINUTES.toMillis(25);
+        //return TimeUnit.MINUTES.toMillis(25);
+        return TimeUnit.MINUTES.toMillis(2);
     }
 
     public static int getPomodorosToLongBreak(Context context) {
