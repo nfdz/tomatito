@@ -6,6 +6,10 @@ Android application implementation of pomodoro timer. I like this technique, I u
   <img src="dev/logo_icon.png?raw=true" alt="Tomatito"/>
 </p>
 
+## TODO
+* Use AlarmManager exact time.
+* Use an image in main activity portrait to show a tomato working/resting or text in landscape.
+
 ## Why create yet another application?
 
 This project is mainly due to educational reasons. I wanted to try different Android features that I had not yet used (such as schedule time-sensitive with AlarmManager). This was the perfect excuse to implement a tiny and simple application with my approach of what a pomodoro timer should be.
