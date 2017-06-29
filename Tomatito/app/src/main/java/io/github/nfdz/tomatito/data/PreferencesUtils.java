@@ -60,4 +60,17 @@ public class PreferencesUtils {
         return 4;
     }
 
+    public static Pomodoro getPomodoro(Context context) {
+        long pomodoroStartTime = getCurrentPomodoro(context);
+        int pomodorosToLongBreak = PreferencesUtils.getPomodorosToLongBreak(context);
+        long pomodoroTime = PreferencesUtils.getPomodoroTime(context);
+        long shortBreakTime = PreferencesUtils.getShortBreakTime(context);
+        long longBreakTime = PreferencesUtils.getLongBreakTime(context);
+        return new Pomodoro(pomodoroStartTime,
+                            pomodoroTime,
+                            shortBreakTime,
+                            longBreakTime,
+                            pomodorosToLongBreak);
+    }
+
 }
