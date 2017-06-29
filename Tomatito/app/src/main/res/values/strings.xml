@@ -6,4 +6,7 @@
 
     <string name="action_settings">Settings</string>
 
+    <string name="pomodoros_counter_title">Pomodoros:</string>
+    <string name="breaks_counter_title">Breaks:</string>
+
 </resources>

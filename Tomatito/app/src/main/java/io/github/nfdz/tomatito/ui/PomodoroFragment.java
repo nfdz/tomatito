@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.ColorInt;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -20,6 +21,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.TransitionOptions;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,7 +42,8 @@ public class PomodoroFragment extends Fragment implements SharedPreferences.OnSh
     @BindView(R.id.fab_start_pomodoro) FloatingActionButton mStartButton;
     @BindView(R.id.fab_stop_pomodoro) FloatingActionButton mStopButton;
     @BindView(R.id.pb_pomodoro_progress) ProgressBar mProgressBar;
-    @BindView(R.id.iv_pomodoro_state) ImageView mStateGif;
+
+    @Nullable @BindView(R.id.iv_pomodoro_state) ImageView mStateGif;
 
     private int currentGif = -1;
 
@@ -94,16 +97,11 @@ public class PomodoroFragment extends Fragment implements SharedPreferences.OnSh
     }
 
     private void updateCurrentPomodoro() {
+        if (mTimerUpdater != null) mTimerHandler.removeCallbacks(mTimerUpdater);
         Pomodoro pomodoro = PreferencesUtils.getPomodoro(getContext());
         if (PomodoroUtils.isValid(pomodoro)) {
-            mStopButton.setVisibility(View.VISIBLE);
-            mStartButton.setVisibility(View.GONE);
-            if (mTimerUpdater != null) mTimerHandler.removeCallbacks(mTimerUpdater);
             initPomodoro(pomodoro);
         } else {
-            mStartButton.setVisibility(View.VISIBLE);
-            mStopButton.setVisibility(View.GONE);
-            if (mTimerUpdater != null) mTimerHandler.removeCallbacks(mTimerUpdater);
             clearPomodoro(pomodoro);
         }
     }
@@ -120,11 +118,17 @@ public class PomodoroFragment extends Fragment implements SharedPreferences.OnSh
     }
 
     private void initPomodoro(Pomodoro pomodoro) {
+        mStopButton.setVisibility(View.VISIBLE);
+        mStartButton.setVisibility(View.GONE);
+
         mTimerUpdater = new TimerUpdater(pomodoro);
         mTimerHandler.post(mTimerUpdater);
     }
 
     private void clearPomodoro(Pomodoro pomodoro) {
+        mStartButton.setVisibility(View.VISIBLE);
+        mStopButton.setVisibility(View.GONE);
+
         mProgressBar.setProgress(0);
         mPomodoroTime.setText("00:00");
         mPomodoroTotalTime.setText("/ " + PomodoroUtils.getTimerTextFor(pomodoro.pomodoroTime));
@@ -147,8 +151,8 @@ public class PomodoroFragment extends Fragment implements SharedPreferences.OnSh
             PomodoroUtils.PomodoroState state = PomodoroUtils.getPomodoroState(pomodoro);
             switch (state.flag) {
                 case PomodoroUtils.INVALID_STATE:
-                    updateCurrentPomodoro();
-                    setFireworksGif();
+                    disableGif();
+                    clearPomodoro(pomodoro);
                     return;
                 case PomodoroUtils.WORKING_STATE:
                     mPomodoroTime.setText(PomodoroUtils.getTimerTextFor(state.progressTime));
@@ -178,7 +182,7 @@ public class PomodoroFragment extends Fragment implements SharedPreferences.OnSh
                     progress = (int) (((state.progressTime + 0.0)/pomodoro.longBreakTime) * 100);
                     mProgressBar.setProgress(progress);
                     mPomodoroTotalTime.setText("/ " + PomodoroUtils.getTimerTextFor(pomodoro.longBreakTime));
-                    setBreakGif();
+                    setFireworksGif();
                     break;
             }
 
@@ -193,7 +197,7 @@ public class PomodoroFragment extends Fragment implements SharedPreferences.OnSh
     }
 
     private void setWorkingGif() {
-        if (currentGif != R.raw.tomato_working) {
+        if (mStateGif != null && currentGif != R.raw.tomato_working) {
             currentGif = R.raw.tomato_working;
             Glide.with(getContext())
                     .load(R.raw.tomato_working)
@@ -202,7 +206,7 @@ public class PomodoroFragment extends Fragment implements SharedPreferences.OnSh
     }
 
     private void setBreakGif() {
-        if (currentGif != R.raw.tomato_break) {
+        if (mStateGif != null && currentGif != R.raw.tomato_break) {
             currentGif = R.raw.tomato_break;
             Glide.with(getContext())
                     .load(R.raw.tomato_break)
@@ -211,7 +215,7 @@ public class PomodoroFragment extends Fragment implements SharedPreferences.OnSh
     }
 
     private void disableGif() {
-        if (currentGif != -1) {
+        if (mStateGif != null && currentGif != -1) {
             currentGif = -1;
             Glide.with(getContext())
                     .load(null)
@@ -220,7 +224,7 @@ public class PomodoroFragment extends Fragment implements SharedPreferences.OnSh
     }
 
     private void setFireworksGif() {
-        if (currentGif != R.raw.fireworks) {
+        if (mStateGif != null && currentGif != R.raw.fireworks) {
             currentGif = R.raw.fireworks;
             Glide.with(getContext())
                     .load(R.raw.fireworks)

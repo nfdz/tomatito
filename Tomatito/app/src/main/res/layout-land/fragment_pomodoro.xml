@@ -111,17 +111,4 @@
         app:layout_constraintBottom_toBottomOf="@+id/tv_pomodoro_time"
         app:layout_constraintLeft_toRightOf="@+id/tv_pomodoro_time" />
 
-    <ImageView
-        android:id="@+id/iv_pomodoro_state"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_margin="16dp"
-        android:padding="8dp"
-        android:scaleType="fitCenter"
-        android:adjustViewBounds="true"
-        app:layout_constraintBottom_toTopOf="@+id/tv_pomodoro_time"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
 </android.support.constraint.ConstraintLayout>
