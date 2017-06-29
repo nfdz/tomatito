@@ -89,7 +89,7 @@
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/ic_start"
         android:layout_margin="16dp"
-        android:backgroundTint="@color/colorPrimary"
+        app:backgroundTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
