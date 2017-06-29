@@ -82,7 +82,7 @@ public class PomodoroUtils {
         }
         long  longBreakEnd = pomodoro.pomodoroTime * pomodoro.pomodorosToLongBreak +
                 pomodoro.shortBreakTime * (pomodoro.pomodorosToLongBreak - 1) + pomodoro.longBreakTime;
-        if (elapsedTime < longBreakEnd) {
+        if (elapsedTime <= longBreakEnd) {
             long longBreakStart = longBreakEnd - pomodoro.longBreakTime;
             long progressTime = elapsedTime - longBreakStart;
 

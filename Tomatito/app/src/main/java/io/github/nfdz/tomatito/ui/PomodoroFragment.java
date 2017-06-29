@@ -15,8 +15,11 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,6 +40,9 @@ public class PomodoroFragment extends Fragment implements SharedPreferences.OnSh
     @BindView(R.id.fab_start_pomodoro) FloatingActionButton mStartButton;
     @BindView(R.id.fab_stop_pomodoro) FloatingActionButton mStopButton;
     @BindView(R.id.pb_pomodoro_progress) ProgressBar mProgressBar;
+    @BindView(R.id.iv_pomodoro_state) ImageView mStateGif;
+
+    private int currentGif = -1;
 
     private final Handler mTimerHandler = new Handler();
     private Runnable mTimerUpdater;
@@ -124,6 +130,7 @@ public class PomodoroFragment extends Fragment implements SharedPreferences.OnSh
         mPomodoroTotalTime.setText("/ " + PomodoroUtils.getTimerTextFor(pomodoro.pomodoroTime));
         mPomodoros.setText("0/" + pomodoro.pomodorosToLongBreak);
         mBreaks.setText("0/" + (pomodoro.pomodorosToLongBreak - 1));
+        disableGif();
     }
 
     private class TimerUpdater implements Runnable {
@@ -141,6 +148,7 @@ public class PomodoroFragment extends Fragment implements SharedPreferences.OnSh
             switch (state.flag) {
                 case PomodoroUtils.INVALID_STATE:
                     updateCurrentPomodoro();
+                    setFireworksGif();
                     return;
                 case PomodoroUtils.WORKING_STATE:
                     mPomodoroTime.setText(PomodoroUtils.getTimerTextFor(state.progressTime));
@@ -150,6 +158,7 @@ public class PomodoroFragment extends Fragment implements SharedPreferences.OnSh
                     progress = (int) (((state.progressTime + 0.0)/pomodoro.pomodoroTime) * 100);
                     mProgressBar.setProgress(progress);
                     mPomodoroTotalTime.setText("/ " + PomodoroUtils.getTimerTextFor(pomodoro.pomodoroTime));
+                    setWorkingGif();
                     break;
                 case PomodoroUtils.SHORT_BREAK_STATE:
                     mPomodoroTime.setText(PomodoroUtils.getTimerTextFor(state.progressTime));
@@ -159,6 +168,7 @@ public class PomodoroFragment extends Fragment implements SharedPreferences.OnSh
                     progress = (int) (((state.progressTime + 0.0)/pomodoro.shortBreakTime) * 100);
                     mProgressBar.setProgress(progress);
                     mPomodoroTotalTime.setText("/ " + PomodoroUtils.getTimerTextFor(pomodoro.shortBreakTime));
+                    setBreakGif();
                     break;
                 case PomodoroUtils.LONG_BREAK_STATE:
                     mPomodoroTime.setText(PomodoroUtils.getTimerTextFor(state.progressTime));
@@ -168,6 +178,7 @@ public class PomodoroFragment extends Fragment implements SharedPreferences.OnSh
                     progress = (int) (((state.progressTime + 0.0)/pomodoro.longBreakTime) * 100);
                     mProgressBar.setProgress(progress);
                     mPomodoroTotalTime.setText("/ " + PomodoroUtils.getTimerTextFor(pomodoro.longBreakTime));
+                    setBreakGif();
                     break;
             }
 
@@ -180,4 +191,41 @@ public class PomodoroFragment extends Fragment implements SharedPreferences.OnSh
         mProgressBar.getIndeterminateDrawable().setColorFilter(color, PorterDuff.Mode.SRC_IN);
         mProgressBar.getProgressDrawable().setColorFilter(color, PorterDuff.Mode.SRC_IN);
     }
+
+    private void setWorkingGif() {
+        if (currentGif != R.raw.tomato_working) {
+            currentGif = R.raw.tomato_working;
+            Glide.with(getContext())
+                    .load(R.raw.tomato_working)
+                    .into(mStateGif);
+        }
+    }
+
+    private void setBreakGif() {
+        if (currentGif != R.raw.tomato_break) {
+            currentGif = R.raw.tomato_break;
+            Glide.with(getContext())
+                    .load(R.raw.tomato_break)
+                    .into(mStateGif);
+        }
+    }
+
+    private void disableGif() {
+        if (currentGif != -1) {
+            currentGif = -1;
+            Glide.with(getContext())
+                    .load(null)
+                    .into(mStateGif);
+        }
+    }
+
+    private void setFireworksGif() {
+        if (currentGif != R.raw.fireworks) {
+            currentGif = R.raw.fireworks;
+            Glide.with(getContext())
+                    .load(R.raw.fireworks)
+                    .into(mStateGif);
+        }
+    }
+
 }
