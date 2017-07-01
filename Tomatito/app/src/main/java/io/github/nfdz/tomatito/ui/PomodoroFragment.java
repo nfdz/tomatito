@@ -91,7 +91,7 @@ public class PomodoroFragment extends Fragment implements SharedPreferences.OnSh
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (key.equals(PreferencesUtils.CURRENT_POMODORO_KEY)) {
+        if (key.equals(PreferencesUtils.POMODORO_START_TIME_KEY)) {
             updateCurrentPomodoro();
         }
     }
@@ -109,12 +109,12 @@ public class PomodoroFragment extends Fragment implements SharedPreferences.OnSh
     @OnClick(R.id.fab_start_pomodoro)
     void startPomodoro() {
         long newPomodoro = System.currentTimeMillis();
-        PreferencesUtils.setCurrentPomodoro(getContext(), newPomodoro);
+        PreferencesUtils.setPomodoroStartTime(getContext(), newPomodoro);
     }
 
     @OnClick(R.id.fab_stop_pomodoro)
     void stopPomodoro() {
-        PreferencesUtils.deleteCurrentPomodoro(getContext());
+        PreferencesUtils.deletePomodoro(getContext());
     }
 
     private void initPomodoro(Pomodoro pomodoro) {
@@ -155,31 +155,31 @@ public class PomodoroFragment extends Fragment implements SharedPreferences.OnSh
                     clearPomodoro(pomodoro);
                     return;
                 case PomodoroUtils.WORKING_STATE:
-                    mPomodoroTime.setText(PomodoroUtils.getTimerTextFor(state.progressTime));
+                    mPomodoroTime.setText(PomodoroUtils.getTimerTextFor(state.stateProgressTime));
                     mPomodoros.setText(state.pomodoroCounter + "/" + pomodoro.pomodorosToLongBreak);
                     mBreaks.setText(state.breakCounter + "/" + (pomodoro.pomodorosToLongBreak - 1));
                     setProgressBarColor(ContextCompat.getColor(getContext(), R.color.progressBarWorking));
-                    progress = (int) (((state.progressTime + 0.0)/pomodoro.pomodoroTime) * 100);
+                    progress = (int) (((state.stateProgressTime + 0.0)/pomodoro.pomodoroTime) * 100);
                     mProgressBar.setProgress(progress);
                     mPomodoroTotalTime.setText("/ " + PomodoroUtils.getTimerTextFor(pomodoro.pomodoroTime));
                     setWorkingGif();
                     break;
                 case PomodoroUtils.SHORT_BREAK_STATE:
-                    mPomodoroTime.setText(PomodoroUtils.getTimerTextFor(state.progressTime));
+                    mPomodoroTime.setText(PomodoroUtils.getTimerTextFor(state.stateProgressTime));
                     mPomodoros.setText(state.pomodoroCounter + "/" + pomodoro.pomodorosToLongBreak);
                     mBreaks.setText(state.pomodoroCounter + "/" + (pomodoro.pomodorosToLongBreak - 1));
                     setProgressBarColor(ContextCompat.getColor(getContext(), R.color.progressBarBreak));
-                    progress = (int) (((state.progressTime + 0.0)/pomodoro.shortBreakTime) * 100);
+                    progress = (int) (((state.stateProgressTime + 0.0)/pomodoro.shortBreakTime) * 100);
                     mProgressBar.setProgress(progress);
                     mPomodoroTotalTime.setText("/ " + PomodoroUtils.getTimerTextFor(pomodoro.shortBreakTime));
                     setBreakGif();
                     break;
                 case PomodoroUtils.LONG_BREAK_STATE:
-                    mPomodoroTime.setText(PomodoroUtils.getTimerTextFor(state.progressTime));
+                    mPomodoroTime.setText(PomodoroUtils.getTimerTextFor(state.stateProgressTime));
                     mPomodoros.setText(pomodoro.pomodorosToLongBreak + "/" + pomodoro.pomodorosToLongBreak);
                     mBreaks.setText((pomodoro.pomodorosToLongBreak - 1) + "/" + (pomodoro.pomodorosToLongBreak - 1));
                     setProgressBarColor(ContextCompat.getColor(getContext(), R.color.progressBarBreak));
-                    progress = (int) (((state.progressTime + 0.0)/pomodoro.longBreakTime) * 100);
+                    progress = (int) (((state.stateProgressTime + 0.0)/pomodoro.longBreakTime) * 100);
                     mProgressBar.setProgress(progress);
                     mPomodoroTotalTime.setText("/ " + PomodoroUtils.getTimerTextFor(pomodoro.longBreakTime));
                     setFireworksGif();

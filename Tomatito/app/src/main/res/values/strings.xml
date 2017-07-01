@@ -6,7 +6,18 @@
 
     <string name="action_settings">Settings</string>
 
+    <!-- Pomodoro fragment strings -->
     <string name="pomodoros_counter_title">Pomodoros:</string>
     <string name="breaks_counter_title">Breaks:</string>
+
+    <!-- Notification strings -->
+    <string name="notification_title_work">Pomodoro: Work</string>
+    <string name="notification_text_work">It is time to go back to work</string>
+    <string name="notification_title_short_break">Pomodoro: Short Break</string>
+    <string name="notification_text_short_break">Take a short break from work</string>
+    <string name="notification_title_long_break">Pomodoro: Long Break</string>
+    <string name="notification_text_long_break">Take a long break from work</string>
+    <string name="notification_title_end">Pomodoro: End</string>
+    <string name="notification_text_end">Congratulations, you have finished the pomodoro!</string>
 
 </resources>

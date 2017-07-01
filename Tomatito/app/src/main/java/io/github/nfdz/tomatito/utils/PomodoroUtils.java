@@ -35,7 +35,8 @@ public class PomodoroUtils {
         @PomodoroStateFlag
         public final int flag;
 
-        public long progressTime;
+        public long stateProgressTime;
+        public long stateUtcEndTime;
         public int pomodoroCounter;
         public int breakCounter;
     }
@@ -60,7 +61,8 @@ public class PomodoroUtils {
                 PomodoroState state = new PomodoroState(WORKING_STATE);
                 state.pomodoroCounter = pomodoroCounter;
                 state.breakCounter = breakCounter;
-                state.progressTime= progressTime;
+                state.stateProgressTime = progressTime;
+                state.stateUtcEndTime = pomodoro.pomodoroStartTime + pomodoroEnd;
                 return state;
             } else if (elapsedTime < pomodoroEnd + pomodoro.shortBreakTime) {
                 // it is on a break
@@ -73,7 +75,8 @@ public class PomodoroUtils {
                     PomodoroState state = new PomodoroState(SHORT_BREAK_STATE);
                     state.pomodoroCounter = pomodoroCounter;
                     state.breakCounter = breakCounter;
-                    state.progressTime= progressTime;
+                    state.stateProgressTime = progressTime;
+                    state.stateUtcEndTime = pomodoro.pomodoroStartTime + pomodoroEnd + pomodoro.shortBreakTime;
                     return state;
                 } else {
                     // long break, do nothing because long break is handle outside for
@@ -89,7 +92,8 @@ public class PomodoroUtils {
             PomodoroState state = new PomodoroState(LONG_BREAK_STATE);
             state.pomodoroCounter = pomodoro.pomodorosToLongBreak;
             state.breakCounter = pomodoro.pomodorosToLongBreak - 1;
-            state.progressTime= progressTime;
+            state.stateProgressTime = progressTime;
+            state.stateUtcEndTime = pomodoro.pomodoroStartTime + longBreakEnd;
             return state;
         } else {
             return new PomodoroState(INVALID_STATE);
@@ -111,7 +115,7 @@ public class PomodoroUtils {
     }
 
     public static boolean isValid(Pomodoro pomodoro) {
-        boolean validPomodoro = pomodoro.pomodoroStartTime != PreferencesUtils.CURRENT_POMODORO_DEFAULT;
+        boolean validPomodoro = pomodoro.pomodoroStartTime != PreferencesUtils.POMODORO_START_TIME_DEFAULT;
         return validPomodoro;
     }
 }

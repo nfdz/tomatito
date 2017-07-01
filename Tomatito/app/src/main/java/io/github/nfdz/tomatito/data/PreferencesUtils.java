@@ -9,31 +9,37 @@ import android.preference.PreferenceManager;
 
 import java.util.concurrent.TimeUnit;
 
+import io.github.nfdz.tomatito.utils.AlarmUtils;
+
 /**
  * This class has static methods to ease work with shared preferences
  */
 public class PreferencesUtils {
 
-    public static final String CURRENT_POMODORO_KEY = "current-pomodoro";
-    public static final long CURRENT_POMODORO_DEFAULT = -1;
+    public static final String POMODORO_START_TIME_KEY = "current-pomodoro";
+    public static final long POMODORO_START_TIME_DEFAULT = -1;
 
-    public static long getCurrentPomodoro(Context context) {
+    public static long getPomodoroStartTime(Context context) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        return sp.getLong(CURRENT_POMODORO_KEY, CURRENT_POMODORO_DEFAULT);
+        return sp.getLong(POMODORO_START_TIME_KEY, POMODORO_START_TIME_DEFAULT);
     }
 
-    public static void setCurrentPomodoro(Context context, long currentPomodoro) {
+    public static void setPomodoroStartTime(Context context, long currentPomodoro) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = sp.edit();
-        editor.putLong(CURRENT_POMODORO_KEY, currentPomodoro);
+        editor.putLong(POMODORO_START_TIME_KEY, currentPomodoro);
         editor.apply();
+
+        AlarmUtils.scheduleAlarm(context);
     }
 
-    public static void deleteCurrentPomodoro(Context context) {
+    public static void deletePomodoro(Context context) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = sp.edit();
-        editor.putLong(CURRENT_POMODORO_KEY, CURRENT_POMODORO_DEFAULT);
+        editor.putLong(POMODORO_START_TIME_KEY, POMODORO_START_TIME_DEFAULT);
         editor.apply();
+
+        AlarmUtils.disableAlarm(context);
     }
 
     public static long getPomodoroTime(Context context) {
@@ -61,7 +67,7 @@ public class PreferencesUtils {
     }
 
     public static Pomodoro getPomodoro(Context context) {
-        long pomodoroStartTime = getCurrentPomodoro(context);
+        long pomodoroStartTime = getPomodoroStartTime(context);
         int pomodorosToLongBreak = PreferencesUtils.getPomodorosToLongBreak(context);
         long pomodoroTime = PreferencesUtils.getPomodoroTime(context);
         long shortBreakTime = PreferencesUtils.getShortBreakTime(context);
@@ -73,4 +79,8 @@ public class PreferencesUtils {
                             pomodorosToLongBreak);
     }
 
+    public static boolean getAlarmEnabled(Context context) {
+        // TODO
+        return true;
+    }
 }
