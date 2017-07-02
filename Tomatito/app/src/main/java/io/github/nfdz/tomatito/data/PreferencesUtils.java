@@ -44,27 +44,35 @@ public class PreferencesUtils {
     }
 
     public static long getPomodoroTime(Context context) {
-        // TODO
-        //return TimeUnit.MINUTES.toMillis(25);
-        return TimeUnit.MINUTES.toMillis(1);
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        String key = context.getString(R.string.pref_pomodoro_time_key);
+        int defaultValue = Integer.parseInt(context.getString(R.string.pref_pomodoro_time_default));
+        int pomodoroTimeMinutes = sp.getInt(key, defaultValue);
+        return TimeUnit.MINUTES.toMillis(pomodoroTimeMinutes);
     }
 
     public static long getShortBreakTime(Context context) {
-        // TODO
-        //return TimeUnit.MINUTES.toMillis(5);
-        return TimeUnit.MINUTES.toMillis(1);
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        String key = context.getString(R.string.pref_short_break_time_key);
+        int defaultValue = Integer.parseInt(context.getString(R.string.pref_short_break_time_default));
+        int shortBreakTimeMinutes = sp.getInt(key, defaultValue);
+        return TimeUnit.MINUTES.toMillis(shortBreakTimeMinutes);
     }
 
 
     public static long getLongBreakTime(Context context) {
-        // TODO
-        //return TimeUnit.MINUTES.toMillis(25);
-        return TimeUnit.MINUTES.toMillis(2);
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        String key = context.getString(R.string.pref_long_break_time_key);
+        int defaultValue = Integer.parseInt(context.getString(R.string.pref_long_break_time_default));
+        int longBreakTimeMinutes = sp.getInt(key, defaultValue);
+        return TimeUnit.MINUTES.toMillis(longBreakTimeMinutes);
     }
 
     public static int getPomodorosToLongBreak(Context context) {
-        // TODO
-        return 4;
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        String key = context.getString(R.string.pref_pomodoros_to_long_break_key);
+        int defaultValue = Integer.parseInt(context.getString(R.string.pref_pomodoros_to_long_break_default));
+        return sp.getInt(key, defaultValue);
     }
 
     public static Pomodoro getPomodoro(Context context) {
@@ -92,5 +100,28 @@ public class PreferencesUtils {
         String key = context.getString(R.string.pref_vibration_key);
         boolean defaultValue = Boolean.parseBoolean(context.getString(R.string.pref_vibration_default));
         return sp.getBoolean(key, defaultValue);
+    }
+
+    public static void restoreDefaultPomodoroPrefs(Context context) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sp.edit();
+
+        int pomodoroTimeDefault = Integer.parseInt(context.getString(R.string.pref_pomodoro_time_default));
+        String pomodoroTimeKey = context.getString(R.string.pref_pomodoro_time_key);
+        editor.putInt(pomodoroTimeKey, pomodoroTimeDefault);
+
+        int shortBreakTimeDefault = Integer.parseInt(context.getString(R.string.pref_short_break_time_default));
+        String shortBreakTimeKey = context.getString(R.string.pref_short_break_time_key);
+        editor.putInt(shortBreakTimeKey, shortBreakTimeDefault);
+
+        int longBreakTimeDefault = Integer.parseInt(context.getString(R.string.pref_long_break_time_default));
+        String longBreakTimeKey = context.getString(R.string.pref_long_break_time_key);
+        editor.putInt(longBreakTimeKey, longBreakTimeDefault);
+
+        int pomodorosToLongBreakDefault = Integer.parseInt(context.getString(R.string.pref_pomodoros_to_long_break_default));
+        String pomodorosToLongBreakKey = context.getString(R.string.pref_pomodoros_to_long_break_key);
+        editor.putInt(pomodorosToLongBreakKey, pomodorosToLongBreakDefault);
+
+        editor.apply();
     }
 }

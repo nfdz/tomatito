@@ -1,9 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
         android:title="@string/prefs_pomodoro_title"
         android:key="@string/prefs_pomodoro_key">
+
+        <io.github.nfdz.tomatito.ui.NumberPickerPreference
+            android:key="@string/pref_pomodoro_time_key"
+            android:title="@string/pref_pomodoro_time_title"
+            android:defaultValue="@string/pref_pomodoro_time_default"
+            app:min_number="5"
+            app:max_number="60"
+            app:summary_suffix="minutes" />
+
+        <io.github.nfdz.tomatito.ui.NumberPickerPreference
+            android:key="@string/pref_short_break_time_key"
+            android:title="@string/pref_short_break_time_title"
+            android:defaultValue="@string/pref_short_break_time_default"
+            app:min_number="2"
+            app:max_number="60"
+            app:summary_suffix="minutes" />
+
+        <io.github.nfdz.tomatito.ui.NumberPickerPreference
+            android:key="@string/pref_long_break_time_key"
+            android:title="@string/pref_long_break_time_title"
+            android:defaultValue="@string/pref_long_break_time_default"
+            app:min_number="5"
+            app:max_number="60"
+            app:summary_suffix="minutes" />
+
+        <io.github.nfdz.tomatito.ui.NumberPickerPreference
+            android:key="@string/pref_pomodoros_to_long_break_key"
+            android:title="@string/pref_pomodoros_to_long_break_title"
+            android:defaultValue="@string/pref_pomodoros_to_long_break_default"
+            app:min_number="2"
+            app:max_number="15"
+            app:summary_suffix="pomodoros" />
+
+        <Preference
+            android:title="@string/pref_restore_default_title"
+            android:key="@string/pref_restore_default_key"
+            android:summary="@string/pref_restore_default_summary"/>
 
     </PreferenceCategory>
 
