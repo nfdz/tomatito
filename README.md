@@ -7,8 +7,7 @@ Android application implementation of pomodoro timer. I like this technique, I u
 </p>
 
 ## TODO
-* Use AlarmManager exact time.
-* Use an image in main activity portrait to show a tomato working/resting or text in landscape.
+* Implement records feature
 
 ## Why create yet another application?
 

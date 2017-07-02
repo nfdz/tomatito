@@ -17,8 +17,6 @@ public class AlarmService extends IntentService {
     public static final String LONG_BREAK_ALARM = "long-break";
     public static final String END_ALARM = "end";
 
-    private static final long[] VIBRATION_PATTERN = { 0, 200, 500, 200, 500, 200, 500, 200, 500 };
-
     public AlarmService() {
         super(AlarmService.class.getSimpleName());
     }
@@ -30,13 +28,6 @@ public class AlarmService extends IntentService {
 
         boolean alarmEnabled = PreferencesUtils.getAlarmEnabled(this);
         if (alarmEnabled) {
-
-            // vibrate
-            boolean vibrationEnabled = PreferencesUtils.getVibrationEnabled(this);
-            if (vibrationEnabled) {
-                Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                if (v != null && v.hasVibrator()) v.vibrate(VIBRATION_PATTERN , -1);
-            }
 
             // notify
             switch(action) {

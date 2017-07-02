@@ -24,6 +24,9 @@
         <service
             android:name=".services.AlarmService"
             android:exported="false" />
+        <service
+            android:name=".services.PomodoroService"
+            android:exported="false" />
 
         <activity android:name=".ui.SettingsActivity"
             android:exported="false"

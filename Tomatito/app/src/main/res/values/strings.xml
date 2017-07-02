@@ -21,6 +21,9 @@
     <string name="notification_title_end">Pomodoro: End</string>
     <string name="notification_text_end">Congratulations, you have finished the pomodoro!</string>
 
+    <string name="notification_action_stop">Stop pomodoro</string>
+    <string name="notification_action_restart">Restart pomodoro</string>
+
     <!-- Preferences strings -->
     <string name="prefs_pomodoro_title">Pomodoro</string>
     <string name="prefs_pomodoro_key" translatable="false">pomodoro-settings</string>
