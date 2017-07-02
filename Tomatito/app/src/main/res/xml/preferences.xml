@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="@string/prefs_pomodoro_title"
+        android:key="@string/prefs_pomodoro_key">
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/prefs_app_title"
+        android:key="@string/prefs_app_key">
+
+        <SwitchPreference
+            android:key="@string/pref_alarm_key"
+            android:title="@string/pref_alarm_title"
+            android:summary="@string/pref_alarm_summary"
+            android:defaultValue="@string/pref_alarm_default" />
+
+        <SwitchPreference
+            android:key="@string/pref_vibration_key"
+            android:title="@string/pref_vibration_title"
+            android:summary="@string/pref_vibration_summary"
+            android:defaultValue="@string/pref_vibration_default"
+            android:dependency="@string/pref_alarm_key"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

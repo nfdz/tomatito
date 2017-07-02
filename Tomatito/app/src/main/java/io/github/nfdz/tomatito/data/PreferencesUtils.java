@@ -9,6 +9,7 @@ import android.preference.PreferenceManager;
 
 import java.util.concurrent.TimeUnit;
 
+import io.github.nfdz.tomatito.R;
 import io.github.nfdz.tomatito.utils.AlarmUtils;
 
 /**
@@ -80,7 +81,16 @@ public class PreferencesUtils {
     }
 
     public static boolean getAlarmEnabled(Context context) {
-        // TODO
-        return true;
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        String key = context.getString(R.string.pref_alarm_key);
+        boolean defaultValue = Boolean.parseBoolean(context.getString(R.string.pref_alarm_default));
+        return sp.getBoolean(key, defaultValue);
+    }
+
+    public static boolean getVibrationEnabled(Context context) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        String key = context.getString(R.string.pref_vibration_key);
+        boolean defaultValue = Boolean.parseBoolean(context.getString(R.string.pref_vibration_default));
+        return sp.getBoolean(key, defaultValue);
     }
 }

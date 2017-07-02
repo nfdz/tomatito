@@ -6,15 +6,20 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/appbar_height"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-    app:elevation="@dimen/appbar_elevation">
+    android:elevation="@dimen/appbar_elevation">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:elevation="0dp"
         app:layout_scrollFlags="scroll|enterAlways"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.v7.widget.ActionMenuView
+            android:id="@+id/amvMenuLeft"
+            android:layout_gravity="start|center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="?attr/actionBarSize"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -28,7 +33,7 @@
             app:srcCompat="@drawable/ic_logo"/>
 
         <android.support.v7.widget.ActionMenuView
-            android:id="@+id/amvMenu"
+            android:id="@+id/amvMenuRight"
             android:layout_gravity="end|center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="?attr/actionBarSize"/>

@@ -24,10 +24,10 @@ import butterknife.ButterKnife;
 import io.github.nfdz.tomatito.R;
 import timber.log.Timber;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ActionMenuView.OnMenuItemClickListener {
 
     @BindView(R.id.toolbar) Toolbar mToolbar;
-    @BindView(R.id.amvMenu) ActionMenuView mMenu;
+    @BindView(R.id.amvMenuRight) ActionMenuView mMenu;
     @BindView(R.id.main_pager) ViewPager mPager;
     @BindView(R.id.main_navigation) BottomNavigationView mNavigation;
 
@@ -58,18 +58,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, mMenu.getMenu());
+        mMenu.setOnMenuItemClickListener(this);
         return true;
     }
+
     @Override
-    public boolean onOptionsItemSelected(final MenuItem item) {
+    public boolean onMenuItemClick(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            // TODO
-            //Intent settingsIntent = new Intent(this, SettingsActivity.class);
-            //startActivity(settingsIntent);
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
             return true;
         }
-        return super.onOptionsItemSelected(item);
+        return false;
     }
 
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {

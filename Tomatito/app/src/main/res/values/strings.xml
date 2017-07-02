@@ -5,6 +5,7 @@
     <string name="navigation_title_records">Records</string>
 
     <string name="action_settings">Settings</string>
+    <string name="action_back">Go Back</string>
 
     <!-- Pomodoro fragment strings -->
     <string name="pomodoros_counter_title">Pomodoros:</string>
@@ -19,5 +20,22 @@
     <string name="notification_text_long_break">Take a long break from work</string>
     <string name="notification_title_end">Pomodoro: End</string>
     <string name="notification_text_end">Congratulations, you have finished the pomodoro!</string>
+
+    <!-- Preferences strings -->
+    <string name="prefs_pomodoro_title">Pomodoro</string>
+    <string name="prefs_pomodoro_key" translatable="false">pomodoro-settings</string>
+    <string name="prefs_app_title">Application</string>
+    <string name="prefs_app_key" translatable="false">application-settings</string>
+
+
+    <string name="pref_alarm_key" translatable="false">pomodoro-alarm</string>
+    <string name="pref_alarm_default" translatable="false">true</string>
+    <string name="pref_alarm_title">Alarm</string>
+    <string name="pref_alarm_summary">Pomodoro events will be alerted by a notification</string>
+
+    <string name="pref_vibration_key" translatable="false">pomodoro-vibration</string>
+    <string name="pref_vibration_default" translatable="false">true</string>
+    <string name="pref_vibration_title">Vibration</string>
+    <string name="pref_vibration_summary">The phone will vibrate several times to alert you of the events</string>
 
 </resources>

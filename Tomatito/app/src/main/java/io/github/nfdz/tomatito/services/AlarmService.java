@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Vibrator;
 
+import io.github.nfdz.tomatito.data.PreferencesUtils;
 import io.github.nfdz.tomatito.utils.AlarmUtils;
 import io.github.nfdz.tomatito.utils.NotificationUtils;
 import timber.log.Timber;
@@ -27,29 +28,35 @@ public class AlarmService extends IntentService {
         String action = intent.getAction();
         Timber.d("Alarm service triggered, action: " + action);
 
-        // vibrate
-        // TODO check preference
-        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        if (v != null && v.hasVibrator()) v.vibrate(VIBRATION_PATTERN , -1);
+        boolean alarmEnabled = PreferencesUtils.getAlarmEnabled(this);
+        if (alarmEnabled) {
 
-        // notify
-        // TODO check preference
-        switch(action) {
-            case WORK_ALARM:
-                NotificationUtils.notifyWork(this);
-                break;
-            case SHORT_BREAK_ALARM:
-                NotificationUtils.notifyShortBreak(this);
-                break;
-            case LONG_BREAK_ALARM:
-                NotificationUtils.notifyLongBreak(this);
-                break;
-            case END_ALARM:
-                NotificationUtils.notifyEnd(this);
-                break;
+            // vibrate
+            boolean vibrationEnabled = PreferencesUtils.getVibrationEnabled(this);
+            if (vibrationEnabled) {
+                Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                if (v != null && v.hasVibrator()) v.vibrate(VIBRATION_PATTERN , -1);
+            }
+
+            // notify
+            switch(action) {
+                case WORK_ALARM:
+                    NotificationUtils.notifyWork(this);
+                    break;
+                case SHORT_BREAK_ALARM:
+                    NotificationUtils.notifyShortBreak(this);
+                    break;
+                case LONG_BREAK_ALARM:
+                    NotificationUtils.notifyLongBreak(this);
+                    break;
+                case END_ALARM:
+                    NotificationUtils.notifyEnd(this);
+                    break;
+            }
+
+            // schedule the next one
+            AlarmUtils.scheduleAlarm(this);
         }
 
-        // schedule the next one
-        AlarmUtils.scheduleAlarm(this);
     }
 }

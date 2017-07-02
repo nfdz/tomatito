@@ -88,15 +88,15 @@ public class AlarmUtils {
         PendingIntent operationEnd = PendingIntent.getService(context, 0, intentEnd, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Intent intentWork = new Intent(context, AlarmService.class);
-        intentEnd.setAction(AlarmService.WORK_ALARM);
+        intentWork.setAction(AlarmService.WORK_ALARM);
         PendingIntent operationWork = PendingIntent.getService(context, 0, intentWork, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Intent intentShortBreak = new Intent(context, AlarmService.class);
-        intentEnd.setAction(AlarmService.SHORT_BREAK_ALARM);
+        intentShortBreak.setAction(AlarmService.SHORT_BREAK_ALARM);
         PendingIntent operationShortBreak = PendingIntent.getService(context, 0, intentShortBreak, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Intent intentLongBreak = new Intent(context, AlarmService.class);
-        intentEnd.setAction(AlarmService.LONG_BREAK_ALARM);
+        intentLongBreak.setAction(AlarmService.LONG_BREAK_ALARM);
         PendingIntent operationLongBreak = PendingIntent.getService(context, 0, intentLongBreak, PendingIntent.FLAG_UPDATE_CURRENT);
 
         manager.cancel(operationEnd);
