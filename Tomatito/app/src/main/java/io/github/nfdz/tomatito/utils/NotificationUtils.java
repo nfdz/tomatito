@@ -27,10 +27,12 @@ public class NotificationUtils {
         PendingIntent operation =
                 PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
+        String textString = context.getString(text);
         Notification note = new NotificationCompat.Builder(context)
                 .setContentTitle(context.getString(title))
-                .setContentText(context.getString(text))
-                //.setSmallIcon(R.drawable.ic)
+                .setContentText(textString)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(textString))
+                .setSmallIcon(R.drawable.ic_tomato)
                 .setContentIntent(operation)
                 .setAutoCancel(true)
                 .build();
