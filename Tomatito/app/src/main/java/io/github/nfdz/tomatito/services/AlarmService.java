@@ -17,7 +17,7 @@ public class AlarmService extends IntentService {
     public static final String END_ALARM = "end";
 
     private static final long[] VIBRATION_PATTERN = { 0, 200, 500, 200, 500, 200, 500, 200, 500 };
-    
+
     public AlarmService() {
         super(AlarmService.class.getSimpleName());
     }

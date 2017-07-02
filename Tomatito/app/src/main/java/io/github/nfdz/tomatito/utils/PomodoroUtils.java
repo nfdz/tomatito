@@ -115,7 +115,15 @@ public class PomodoroUtils {
     }
 
     public static boolean isValid(Pomodoro pomodoro) {
-        boolean validPomodoro = pomodoro.pomodoroStartTime != PreferencesUtils.POMODORO_START_TIME_DEFAULT;
-        return validPomodoro;
+        boolean isDefault = pomodoro.pomodoroStartTime != PreferencesUtils.POMODORO_START_TIME_DEFAULT;
+        if (isDefault) {
+            long endTime = pomodoro.pomodoroStartTime +
+                    pomodoro.pomodoroTime * pomodoro.pomodorosToLongBreak +
+                    pomodoro.shortBreakTime * (pomodoro.pomodorosToLongBreak - 1) +
+                    pomodoro.longBreakTime;
+            long now = System.currentTimeMillis() + 5000; // 5s safe margin
+            return now < endTime;
+        }
+        return false;
     }
 }
