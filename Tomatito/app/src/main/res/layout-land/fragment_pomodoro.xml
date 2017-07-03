@@ -89,7 +89,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/ic_start"
-        android:layout_margin="16dp"
+        android:layout_marginBottom="@dimen/fab_pomodoro_margin_bottom"
+        android:layout_marginRight="@dimen/fab_pomodoro_margin_end"
         app:backgroundTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
@@ -99,7 +100,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/ic_stop"
-        android:layout_margin="16dp"
+        android:layout_marginBottom="@dimen/fab_pomodoro_margin_bottom"
+        android:layout_marginRight="@dimen/fab_pomodoro_margin_end"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 

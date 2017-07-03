@@ -8,4 +8,20 @@
 
     <dimen name="appbar_height">70dp</dimen>
     <dimen name="appbar_logo_margin">20dp</dimen>
+
+    <!-- This value depends on appbar_height dimen-->
+    <dimen name="fab_pomodoro_margin_bottom">86dp</dimen>
+    <dimen name="fab_pomodoro_margin_end">16dp</dimen>
+
+    <dimen name="nav_bottom_height">55dp</dimen>
+
+    <dimen name="list_item_height">80dp</dimen>
+    <dimen name="list_item_vertical_padding">10dp</dimen>
+    <dimen name="list_item_circle_size">50dp</dimen>
+    <dimen name="list_item_circle_margin_end">10dp</dimen>
+
+
+
+    <dimen name="loading_size">40dp</dimen>
+
 </resources>

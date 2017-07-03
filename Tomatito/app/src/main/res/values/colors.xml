@@ -5,8 +5,6 @@
     <color name="colorPrimaryLight">#FFCDD2</color>
     <color name="colorAccent">#4CAF50</color>
 
-    <color name="white">#FFFFFF</color>
-
     <color name="progressBarWorking">@color/colorPrimary</color>
     <color name="progressBarBreak">@color/colorAccent</color>
 

@@ -1,6 +1,7 @@
 package io.github.nfdz.tomatito.data;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,6 +31,17 @@ public class FinishedPomodoro {
         this.shortBreakTime = shortBreakTime;
         this.longBreakTime = longBreakTime;
         this.pomodorosToLongBreak = pomodorosToLongBreak;
+    }
+
+    public FinishedPomodoro(Cursor cursor) {
+        // assume that it has default projection
+        this.name = cursor.getString(Contract.PomodoroEntry.POSITION_NAME);
+        this.pomodoroTotalTime = cursor.getLong(Contract.PomodoroEntry.POSITION_TOTAL_TIME);
+        this.pomodoroEndTime = cursor.getLong(Contract.PomodoroEntry.POSITION_END_TIME);
+        this.pomodoroTime = cursor.getLong(Contract.PomodoroEntry.POSITION_WORK_TIME);
+        this.shortBreakTime = cursor.getLong(Contract.PomodoroEntry.POSITION_SHORT_BREAK_TIME);
+        this.longBreakTime = cursor.getLong(Contract.PomodoroEntry.POSITION_LONG_BREAK_TIME);
+        this.pomodorosToLongBreak = cursor.getInt(Contract.PomodoroEntry.POSITION_POMODOROS_TO_LONG_BREAK);
     }
 
     public ContentValues getContentValues() {

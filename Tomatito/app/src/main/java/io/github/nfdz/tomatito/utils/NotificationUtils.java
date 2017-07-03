@@ -43,6 +43,9 @@ public class NotificationUtils {
         boolean vibrationEnabled = PreferencesUtils.getVibrationEnabled(context);
         if (vibrationEnabled) {
             noteBld.setVibrate(VIBRATION_PATTERN);
+        } else {
+            // this is a quick hack to force heads-up notification with no vibration
+            noteBld.setVibrate(new long[0]);
         }
 
         return noteBld;

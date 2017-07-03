@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -26,6 +27,7 @@ import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity implements ActionMenuView.OnMenuItemClickListener {
 
+    @BindView(R.id.appbar) AppBarLayout mAppBarLayout;
     @BindView(R.id.toolbar) Toolbar mToolbar;
     @BindView(R.id.amvMenuRight) ActionMenuView mMenu;
     @BindView(R.id.main_pager) ViewPager mPager;
@@ -102,7 +104,8 @@ public class MainActivity extends AppCompatActivity implements ActionMenuView.On
     private class PagerListener implements ViewPager.OnPageChangeListener {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            // nothing to do
+            // expand app bar in order to work with non scrollable fragments
+            mAppBarLayout.setExpanded(true, false);
         }
 
         @Override

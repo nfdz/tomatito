@@ -8,8 +8,12 @@
     <string name="action_back">Go Back</string>
 
     <!-- Pomodoro fragment strings -->
-    <string name="pomodoros_counter_title">Pomodoros:</string>
-    <string name="breaks_counter_title">Breaks:</string>
+    <string name="pomodoros_counter_title">Pomodoro:</string>
+    <string name="breaks_counter_title">Break:</string>
+
+    <!-- Records fragment strings -->
+    <string name="no_records_message">There is no pomodoro records yet</string>
+    <string name="loading_records_description">Loading pomodoro records</string>
 
     <!-- Notification strings -->
     <string name="notification_title_work">Pomodoro: Work</string>
