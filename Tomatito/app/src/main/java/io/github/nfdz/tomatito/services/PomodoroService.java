@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 
 import io.github.nfdz.tomatito.data.PreferencesUtils;
 import io.github.nfdz.tomatito.utils.NotificationUtils;
+import io.github.nfdz.tomatito.utils.PomodoroUtils;
 
 public class PomodoroService extends IntentService {
 
@@ -22,14 +23,10 @@ public class PomodoroService extends IntentService {
         String action = intent.getAction();
         switch(action) {
             case STOP_POMODORO:
-                PreferencesUtils.deletePomodoro(this);
-                NotificationUtils.cancel(this);
+                PomodoroUtils.stopPomodoro(this);
                 break;
             case RESTART_POMODORO:
-                long now = System.currentTimeMillis();
-                PreferencesUtils.setPomodoroStartTime(this, now);
-                // send notification
-                NotificationUtils.notifyWork(this);
+                PomodoroUtils.startPomodoro(this);
                 break;
         }
     }

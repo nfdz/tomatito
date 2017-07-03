@@ -3,11 +3,15 @@
  */
 package io.github.nfdz.tomatito.utils;
 
+import android.content.Context;
+import android.provider.ContactsContract;
 import android.support.annotation.IntDef;
 
 import java.lang.annotation.Retention;
 import java.util.concurrent.TimeUnit;
 
+import io.github.nfdz.tomatito.data.DatabaseManager;
+import io.github.nfdz.tomatito.data.FinishedPomodoro;
 import io.github.nfdz.tomatito.data.Pomodoro;
 import io.github.nfdz.tomatito.data.PreferencesUtils;
 
@@ -117,13 +121,45 @@ public class PomodoroUtils {
     public static boolean isValid(Pomodoro pomodoro) {
         boolean isDefault = pomodoro.pomodoroStartTime != PreferencesUtils.POMODORO_START_TIME_DEFAULT;
         if (isDefault) {
-            long endTime = pomodoro.pomodoroStartTime +
-                    pomodoro.pomodoroTime * pomodoro.pomodorosToLongBreak +
-                    pomodoro.shortBreakTime * (pomodoro.pomodorosToLongBreak - 1) +
-                    pomodoro.longBreakTime;
+            long endTime = getExpectedEndTime(pomodoro);
             long now = System.currentTimeMillis() + 5000; // 5s safe margin
             return now < endTime;
         }
         return false;
+    }
+
+    public static long getExpectedEndTime(Pomodoro pomodoro) {
+        long endTime = pomodoro.pomodoroStartTime +
+                pomodoro.pomodoroTime * pomodoro.pomodorosToLongBreak +
+                pomodoro.shortBreakTime * (pomodoro.pomodorosToLongBreak - 1) +
+                pomodoro.longBreakTime;
+        return endTime;
+    }
+
+    public static void startPomodoro(Context context) {
+        AlarmUtils.disableAlarm(context);
+        long now = System.currentTimeMillis();
+        PreferencesUtils.setPomodoroStartTime(context, now);
+        AlarmUtils.scheduleAlarm(context);
+        NotificationUtils.notifyWork(context);
+    }
+
+    public static void stopPomodoro(Context context) {
+        Pomodoro currentPomodoro = PreferencesUtils.getPomodoro(context);
+        if (currentPomodoro.pomodoroStartTime != PreferencesUtils.POMODORO_START_TIME_DEFAULT) {
+            storePomodoro(context, currentPomodoro);
+        }
+        PreferencesUtils.deletePomodoro(context);
+        AlarmUtils.disableAlarm(context);
+        NotificationUtils.cancel(context);
+    }
+
+    public static void storePomodoro(Context context, Pomodoro pomodoro) {
+        long now = System.currentTimeMillis() + 5000; // 5s safe margin
+        long expectedEndTime = getExpectedEndTime(pomodoro);
+        long endTime = now > expectedEndTime ? expectedEndTime : now;
+        FinishedPomodoro finishedPomodoro =
+                FinishedPomodoro.buildFinishedPomodoro(pomodoro, endTime);
+        DatabaseManager.getInstance(context).insertPomodoro(finishedPomodoro);
     }
 }

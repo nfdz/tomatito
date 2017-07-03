@@ -8,6 +8,7 @@ import android.preference.PreferenceFragment;
 import io.github.nfdz.tomatito.R;
 import io.github.nfdz.tomatito.data.PreferencesUtils;
 import io.github.nfdz.tomatito.utils.AlarmUtils;
+import io.github.nfdz.tomatito.utils.PomodoroUtils;
 
 public class SettingsFragment extends PreferenceFragment implements
         SharedPreferences.OnSharedPreferenceChangeListener {
@@ -49,22 +50,22 @@ public class SettingsFragment extends PreferenceFragment implements
             int defaultValue = Integer.parseInt(getString(R.string.pref_pomodoro_time_default));
             ((NumberPickerPreference) findPreference(key))
                     .setValue(sharedPreferences.getInt(key, defaultValue));
-            PreferencesUtils.deletePomodoro(getActivity());
+            PomodoroUtils.stopPomodoro(getActivity());
         } else if (key.equals(getString(R.string.pref_short_break_time_key))) {
             int defaultValue = Integer.parseInt(getString(R.string.pref_short_break_time_default));
             ((NumberPickerPreference) findPreference(key))
                     .setValue(sharedPreferences.getInt(key, defaultValue));
-            PreferencesUtils.deletePomodoro(getActivity());
+            PomodoroUtils.stopPomodoro(getActivity());
         } else if (key.equals(getString(R.string.pref_long_break_time_key))) {
             int defaultValue = Integer.parseInt(getString(R.string.pref_long_break_time_default));
             ((NumberPickerPreference) findPreference(key))
                     .setValue(sharedPreferences.getInt(key, defaultValue));
-            PreferencesUtils.deletePomodoro(getActivity());
+            PomodoroUtils.stopPomodoro(getActivity());
         } else if (key.equals(getString(R.string.pref_pomodoros_to_long_break_key))) {
             int defaultValue = Integer.parseInt(getString(R.string.pref_pomodoros_to_long_break_default));
             ((NumberPickerPreference) findPreference(key))
                     .setValue(sharedPreferences.getInt(key, defaultValue));
-            PreferencesUtils.deletePomodoro(getActivity());
+            PomodoroUtils.stopPomodoro(getActivity());
         }
     }
 }

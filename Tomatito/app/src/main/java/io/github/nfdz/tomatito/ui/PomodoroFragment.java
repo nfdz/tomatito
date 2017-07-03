@@ -108,13 +108,12 @@ public class PomodoroFragment extends Fragment implements SharedPreferences.OnSh
 
     @OnClick(R.id.fab_start_pomodoro)
     void startPomodoro() {
-        long newPomodoro = System.currentTimeMillis();
-        PreferencesUtils.setPomodoroStartTime(getContext(), newPomodoro);
+        PomodoroUtils.startPomodoro(getContext());
     }
 
     @OnClick(R.id.fab_stop_pomodoro)
     void stopPomodoro() {
-        PreferencesUtils.deletePomodoro(getContext());
+        PomodoroUtils.stopPomodoro(getContext());
     }
 
     private void initPomodoro(Pomodoro pomodoro) {

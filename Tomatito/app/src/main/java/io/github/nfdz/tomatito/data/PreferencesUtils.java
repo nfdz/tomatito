@@ -30,8 +30,6 @@ public class PreferencesUtils {
         SharedPreferences.Editor editor = sp.edit();
         editor.putLong(POMODORO_START_TIME_KEY, currentPomodoro);
         editor.apply();
-
-        AlarmUtils.scheduleAlarm(context);
     }
 
     public static void deletePomodoro(Context context) {
@@ -39,8 +37,6 @@ public class PreferencesUtils {
         SharedPreferences.Editor editor = sp.edit();
         editor.putLong(POMODORO_START_TIME_KEY, POMODORO_START_TIME_DEFAULT);
         editor.apply();
-
-        AlarmUtils.disableAlarm(context);
     }
 
     public static long getPomodoroTime(Context context) {

@@ -28,8 +28,6 @@ public class AlarmUtils {
 
         if (PomodoroUtils.isValid(pomodoro)) {
             scheduleAlarm(context, pomodoro);
-        } else {
-            PreferencesUtils.deletePomodoro(context);
         }
     }
 
