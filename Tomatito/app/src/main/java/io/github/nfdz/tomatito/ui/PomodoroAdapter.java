@@ -56,7 +56,7 @@ public class PomodoroAdapter extends
         holder.name.setText(pomodoro.name);
         // TODO
         holder.progress.setText("50%");
-        holder.details.setText("40 min working");
+        holder.details.setText("1999/12/31");
     }
 
     public FinishedPomodoro getItem(int position) {

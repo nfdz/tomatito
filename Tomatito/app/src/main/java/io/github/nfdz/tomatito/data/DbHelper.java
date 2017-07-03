@@ -9,7 +9,7 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "tomatito.db";
     private static final int DATABASE_VERSION = 1;
 
-    public DbHelper(Context context) {
+    protected DbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 

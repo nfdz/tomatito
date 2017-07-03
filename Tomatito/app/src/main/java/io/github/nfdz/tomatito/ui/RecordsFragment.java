@@ -5,6 +5,7 @@ package io.github.nfdz.tomatito.ui;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
@@ -27,7 +28,8 @@ import io.github.nfdz.tomatito.data.FinishedPomodoro;
 
 public class RecordsFragment extends Fragment implements
         LoaderManager.LoaderCallbacks<Cursor>,
-        PomodoroAdapter.AdapterOnClickHandler {
+        PomodoroAdapter.AdapterOnClickHandler,
+        DatabaseManager.DatabaseListener {
 
     private static final int ID_RECORDS_LOADER = 9831;
 
@@ -35,7 +37,11 @@ public class RecordsFragment extends Fragment implements
     @BindView(R.id.pb_records_loading) ProgressBar mLoading;
     @BindView(R.id.tv_records_empty) TextView mEmptyView;
 
+    private final Handler mHandler = new Handler();
+
     private PomodoroAdapter mAdapter;
+    private boolean dbChanged = false;
+    private boolean paused = false;
 
     public RecordsFragment() {
         // required empty public constructor
@@ -44,6 +50,34 @@ public class RecordsFragment extends Fragment implements
     public static RecordsFragment newInstance() {
         RecordsFragment fragment = new RecordsFragment();
         return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        DatabaseManager.getInstance(getActivity()).addListener(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        DatabaseManager.getInstance(getActivity()).removeListener(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        paused = false;
+        if (dbChanged) {
+            dbChanged = false;
+            getActivity().getSupportLoaderManager().restartLoader(ID_RECORDS_LOADER, null, this);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        paused = true;
     }
 
     @Override
@@ -142,5 +176,21 @@ public class RecordsFragment extends Fragment implements
     @Override
     public void onClick(long id, FinishedPomodoro pomodoro) {
         // TODO
+    }
+
+    @Override
+    public void notifyChanges() {
+        if (paused) {
+            dbChanged = true;
+        } else {
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    getActivity().getSupportLoaderManager().restartLoader(ID_RECORDS_LOADER,
+                            null,
+                            RecordsFragment.this);
+                }
+            });
+        }
     }
 }

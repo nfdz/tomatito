@@ -7,7 +7,7 @@ Android application implementation of pomodoro timer. I like this technique, I u
 </p>
 
 ## TODO
-* Implement records feature
+* Implement pomodoro record details feature (short click)
 * Implement pause feature
 
 ## Why create yet another application?

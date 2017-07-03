@@ -154,7 +154,7 @@ public class PomodoroUtils {
         NotificationUtils.cancel(context);
     }
 
-    public static void storePomodoro(Context context, Pomodoro pomodoro) {
+    public synchronized static void storePomodoro(Context context, Pomodoro pomodoro) {
         long now = System.currentTimeMillis() + 5000; // 5s safe margin
         long expectedEndTime = getExpectedEndTime(pomodoro);
         long endTime = now > expectedEndTime ? expectedEndTime : now;
