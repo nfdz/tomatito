@@ -1,11 +1,13 @@
 package io.github.nfdz.tomatito.ui;
 
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 
 import io.github.nfdz.tomatito.R;
+import io.github.nfdz.tomatito.data.DatabaseManager;
 import io.github.nfdz.tomatito.data.PreferencesUtils;
 import io.github.nfdz.tomatito.utils.AlarmUtils;
 import io.github.nfdz.tomatito.utils.PomodoroUtils;
@@ -23,6 +25,21 @@ public class SettingsFragment extends PreferenceFragment implements
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 PreferencesUtils.restoreDefaultPomodoroPrefs(getActivity());
+                return true;
+            }
+        });
+
+        Preference clearStoragePrefs = findPreference(getString(R.string.pref_storage_clear_key));
+        clearStoragePrefs.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                new AsyncTask() {
+                    @Override
+                    protected Object doInBackground(Object[] params) {
+                        DatabaseManager.getInstance(getActivity()).removeAllPomodoros();
+                        return null;
+                    }
+                }.execute();
                 return true;
             }
         });
@@ -66,6 +83,8 @@ public class SettingsFragment extends PreferenceFragment implements
             ((NumberPickerPreference) findPreference(key))
                     .setValue(sharedPreferences.getInt(key, defaultValue));
             PomodoroUtils.stopPomodoro(getActivity());
+        } else if (key.equals(getString(R.string.pref_storage_limit_key))) {
+            // TODO
         }
     }
 }

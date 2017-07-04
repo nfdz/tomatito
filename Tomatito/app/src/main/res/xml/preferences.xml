@@ -45,9 +45,29 @@
 
     </PreferenceCategory>
 
+
     <PreferenceCategory
-        android:title="@string/prefs_app_title"
-        android:key="@string/prefs_app_key">
+        android:title="@string/prefs_storage_title"
+        android:key="@string/prefs_storage_key">
+
+        <io.github.nfdz.tomatito.ui.NumberPickerPreference
+            android:key="@string/pref_storage_limit_key"
+            android:title="@string/pref_storage_limit_title"
+            android:defaultValue="@string/pref_storage_limit_default"
+            app:min_number="5"
+            app:max_number="500"
+            app:summary_suffix="pomodoros" />
+
+        <Preference
+            android:title="@string/pref_storage_clear_title"
+            android:key="@string/pref_storage_clear_key"
+            android:summary="@string/pref_storage_clear_summary"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/prefs_alarm_title"
+        android:key="@string/prefs_alarm_key">
 
         <SwitchPreference
             android:key="@string/pref_alarm_key"

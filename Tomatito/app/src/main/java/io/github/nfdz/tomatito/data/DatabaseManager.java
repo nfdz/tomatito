@@ -26,8 +26,10 @@ public class DatabaseManager {
 
     private final DbHelper mDbHelper;
     private final List<DatabaseListener> mListeners;
+    private final Context mContext;
 
     private DatabaseManager(Context context) {
+        mContext = context;
         mDbHelper = new DbHelper(context);
         mListeners = new CopyOnWriteArrayList<>();
     }
@@ -68,6 +70,7 @@ public class DatabaseManager {
         mDbHelper.getWritableDatabase().insert(Contract.PomodoroEntry.TABLE_NAME,
                 null,
                 pomodoro.getContentValues());
+        purgePomodoros(false);
         notifyListeners();
     }
 
@@ -83,6 +86,23 @@ public class DatabaseManager {
                 whereClause,
                 whereArgs);
         notifyListeners();
+    }
+
+    public void removeAllPomodoros() {
+        mDbHelper.getWritableDatabase().delete(Contract.PomodoroEntry.TABLE_NAME, null, null);
+        notifyListeners();
+    }
+
+    public void purgePomodoros() {
+        purgePomodoros(true);
+    }
+
+    private void purgePomodoros(boolean notify) {
+        // TODO
+
+        if (notify) {
+            notifyListeners();
+        }
     }
 }
 

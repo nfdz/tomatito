@@ -34,8 +34,10 @@
     <!-- Preferences strings -->
     <string name="prefs_pomodoro_title">Pomodoro settings</string>
     <string name="prefs_pomodoro_key" translatable="false">pomodoro-settings</string>
-    <string name="prefs_app_title">Application settings</string>
-    <string name="prefs_app_key" translatable="false">application-settings</string>
+    <string name="prefs_alarm_title">Alarm settings</string>
+    <string name="prefs_alarm_key" translatable="false">alarm-settings</string>
+    <string name="prefs_storage_title">Storage settings</string>
+    <string name="prefs_storage_key" translatable="false">storage-settings</string>
 
     <string name="pref_alarm_key" translatable="false">pomodoro-alarm</string>
     <string name="pref_alarm_default" translatable="false">true</string>
@@ -66,5 +68,13 @@
     <string name="pref_restore_default_key" translatable="false">restore-default-values</string>
     <string name="pref_restore_default_title">Restore default values</string>
     <string name="pref_restore_default_summary">The default values are recommended for most people and for all types of tasks</string>
+
+    <string name="pref_storage_limit_key" translatable="false">storage-limit</string>
+    <string name="pref_storage_limit_default" translatable="false">50</string>
+    <string name="pref_storage_limit_title">Storage limit</string>
+
+    <string name="pref_storage_clear_key" translatable="false">storage-clear</string>
+    <string name="pref_storage_clear_title">Clear storage</string>
+    <string name="pref_storage_clear_summary">All stored pomodoros are removed</string>
 
 </resources>

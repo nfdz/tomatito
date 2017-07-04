@@ -23,9 +23,7 @@
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/appbar_logo_margin"
-            android:layout_marginBottom="@dimen/appbar_logo_margin"
+            android:layout_height="@dimen/logo_height"
             android:layout_gravity="center_horizontal"
             android:contentDescription="@string/app_name"
             android:adjustViewBounds="true"
