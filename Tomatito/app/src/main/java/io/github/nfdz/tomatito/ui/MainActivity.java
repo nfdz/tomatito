@@ -23,6 +23,9 @@ import android.view.MenuItem;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.nfdz.tomatito.R;
+import io.github.nfdz.tomatito.data.Pomodoro;
+import io.github.nfdz.tomatito.data.PreferencesUtils;
+import io.github.nfdz.tomatito.utils.PomodoroUtils;
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity implements ActionMenuView.OnMenuItemClickListener {
@@ -55,6 +58,23 @@ public class MainActivity extends AppCompatActivity implements ActionMenuView.On
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.addOnPageChangeListener(mPagerListener);
         mPager.setAdapter(mPagerAdapter);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkPendingPomodoro();
+    }
+
+    /**
+     * Checks if there is a pomodoro pending to be stored.
+     */
+    private void checkPendingPomodoro() {
+        Pomodoro pomodoro = PreferencesUtils.getPomodoro(this);
+        if (pomodoro.pomodoroStartTime != PreferencesUtils.POMODORO_START_TIME_DEFAULT &&
+                !PomodoroUtils.isValid(pomodoro)) {
+            PomodoroUtils.stopPomodoro(this);
+        }
     }
 
     @Override

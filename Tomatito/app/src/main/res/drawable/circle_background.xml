@@ -5,5 +5,5 @@
         android:width="@dimen/list_item_circle_size"
         android:height="@dimen/list_item_circle_size" />
     <solid
-        android:color="@android:color/black" />
+        android:color="@color/colorAccent" />
 </shape>

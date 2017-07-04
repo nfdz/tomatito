@@ -23,6 +23,7 @@ public class PomodoroAdapter extends
 
     public interface AdapterOnClickHandler {
         void onClick(long id, FinishedPomodoro pomodoro);
+        void onLongClick(long id, FinishedPomodoro pomodoro);
     }
 
     private Context mContext;
@@ -54,9 +55,8 @@ public class PomodoroAdapter extends
     public void onBindViewHolder(PomodoroHolder holder, int position) {
         FinishedPomodoro pomodoro = getItem(position);
         holder.name.setText(pomodoro.name);
-        // TODO
-        holder.progress.setText("50%");
-        holder.details.setText("1999/12/31");
+        holder.progress.setText(pomodoro.getOverallProgress());
+        holder.details.setText(pomodoro.getEndTimeDate());
     }
 
     public FinishedPomodoro getItem(int position) {
@@ -74,7 +74,8 @@ public class PomodoroAdapter extends
         return mCursor != null ? mCursor.getCount() : 0;
     }
 
-    public class PomodoroHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class PomodoroHolder extends RecyclerView.ViewHolder
+            implements View.OnClickListener, View.OnLongClickListener {
 
         public @BindView(R.id.tv_list_item_progress) TextView progress;
         public @BindView(R.id.tv_list_item_name) TextView name;
@@ -84,6 +85,7 @@ public class PomodoroAdapter extends
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
 
         @Override
@@ -92,6 +94,15 @@ public class PomodoroAdapter extends
             FinishedPomodoro pomodoro = getItem(position);
             long id = mCursor.getLong(Contract.PomodoroEntry.POSITION_ID);
             mHandler.onClick(id, pomodoro);
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            int position = getAdapterPosition();
+            FinishedPomodoro pomodoro = getItem(position);
+            long id = mCursor.getLong(Contract.PomodoroEntry.POSITION_ID);
+            mHandler.onLongClick(id, pomodoro);
+            return true;
         }
     }
 }

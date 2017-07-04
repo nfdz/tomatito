@@ -150,7 +150,7 @@ public class PomodoroFragment extends Fragment implements SharedPreferences.OnSh
             PomodoroUtils.PomodoroState state = PomodoroUtils.getPomodoroState(pomodoro);
             switch (state.flag) {
                 case PomodoroUtils.INVALID_STATE:
-                    disableGif();
+                    PomodoroUtils.stopPomodoro(getActivity());
                     clearPomodoro(pomodoro);
                     return;
                 case PomodoroUtils.WORKING_STATE:

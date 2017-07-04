@@ -4,6 +4,7 @@
 package io.github.nfdz.tomatito.utils;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.provider.ContactsContract;
 import android.support.annotation.IntDef;
 
@@ -119,8 +120,8 @@ public class PomodoroUtils {
     }
 
     public static boolean isValid(Pomodoro pomodoro) {
-        boolean isDefault = pomodoro.pomodoroStartTime != PreferencesUtils.POMODORO_START_TIME_DEFAULT;
-        if (isDefault) {
+        boolean isDefault = pomodoro.pomodoroStartTime == PreferencesUtils.POMODORO_START_TIME_DEFAULT;
+        if (!isDefault) {
             long endTime = getExpectedEndTime(pomodoro);
             long now = System.currentTimeMillis() + 5000; // 5s safe margin
             return now < endTime;
@@ -147,19 +148,25 @@ public class PomodoroUtils {
     public static void stopPomodoro(Context context) {
         Pomodoro currentPomodoro = PreferencesUtils.getPomodoro(context);
         if (currentPomodoro.pomodoroStartTime != PreferencesUtils.POMODORO_START_TIME_DEFAULT) {
-            storePomodoro(context, currentPomodoro);
+            storePomodoroAsync(context, currentPomodoro);
         }
         PreferencesUtils.deletePomodoro(context);
         AlarmUtils.disableAlarm(context);
         NotificationUtils.cancel(context);
     }
 
-    public synchronized static void storePomodoro(Context context, Pomodoro pomodoro) {
-        long now = System.currentTimeMillis() + 5000; // 5s safe margin
-        long expectedEndTime = getExpectedEndTime(pomodoro);
-        long endTime = now > expectedEndTime ? expectedEndTime : now;
-        FinishedPomodoro finishedPomodoro =
-                FinishedPomodoro.buildFinishedPomodoro(pomodoro, endTime);
-        DatabaseManager.getInstance(context).insertPomodoro(finishedPomodoro);
+    public static void storePomodoroAsync(final Context context, final Pomodoro pomodoro) {
+        new AsyncTask() {
+            @Override
+            protected Object doInBackground(Object[] params) {
+                long now = System.currentTimeMillis() + 5000; // 5s safe margin
+                long expectedEndTime = getExpectedEndTime(pomodoro);
+                long endTime = now > expectedEndTime ? expectedEndTime : now;
+                FinishedPomodoro finishedPomodoro =
+                        FinishedPomodoro.buildFinishedPomodoro(pomodoro, endTime);
+                DatabaseManager.getInstance(context).insertPomodoro(finishedPomodoro);
+                return null;
+            }
+        }.execute();
     }
 }

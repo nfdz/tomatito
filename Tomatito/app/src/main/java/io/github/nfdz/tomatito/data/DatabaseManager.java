@@ -71,7 +71,7 @@ public class DatabaseManager {
         notifyListeners();
     }
 
-    public void editPomodoroName(FinishedPomodoro pomodoro, long id, String name) {
+    public void editPomodoroName(long id, FinishedPomodoro pomodoro, String name) {
         ContentValues values = pomodoro.getContentValues();
         values.put(Contract.PomodoroEntry.COLUMN_NAME, name);
 
@@ -82,6 +82,7 @@ public class DatabaseManager {
                 values,
                 whereClause,
                 whereArgs);
+        notifyListeners();
     }
 }
 

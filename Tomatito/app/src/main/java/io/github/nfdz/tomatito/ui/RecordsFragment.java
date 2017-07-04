@@ -3,7 +3,9 @@
  */
 package io.github.nfdz.tomatito.ui;
 
+import android.content.DialogInterface;
 import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -11,12 +13,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.text.InputType;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -174,11 +180,6 @@ public class RecordsFragment extends Fragment implements
     }
 
     @Override
-    public void onClick(long id, FinishedPomodoro pomodoro) {
-        // TODO
-    }
-
-    @Override
     public void notifyChanges() {
         if (paused) {
             dbChanged = true;
@@ -192,5 +193,49 @@ public class RecordsFragment extends Fragment implements
                 }
             });
         }
+    }
+
+    @Override
+    public void onClick(long id, FinishedPomodoro pomodoro) {
+        // TODO show more information about pomodoro
+    }
+
+    @Override
+    public void onLongClick(final long id, final FinishedPomodoro pomodoro) {
+        // Edit pomodoro name
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(R.string.pomodoro_edit_dialog_title);
+        final EditText input = new EditText(getActivity());
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            input.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        }
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        input.append(pomodoro.name);
+        builder.setView(input);
+        builder.setPositiveButton(R.string.pomodoro_edit_dialog_ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                final String name = input.getText().toString().toLowerCase();
+                if (!TextUtils.isEmpty(name) && !name.equals(pomodoro.name)) {
+                    new AsyncTask() {
+                        @Override
+                        protected Object doInBackground(Object[] params) {
+                            DatabaseManager.getInstance(getActivity()).editPomodoroName(id,
+                                    pomodoro,
+                                    name);
+                            return null;
+                        }
+                    }.execute();
+                }
+            }
+        });
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
     }
 }

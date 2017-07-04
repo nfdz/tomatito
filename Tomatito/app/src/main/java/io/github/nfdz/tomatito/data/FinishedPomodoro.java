@@ -73,7 +73,20 @@ public class FinishedPomodoro {
 
     public static String getDefaultName(long time) {
         SimpleDateFormat format = new SimpleDateFormat("HH:mm", Locale.getDefault());
-        return "Pomodoro - " + format.format(new Date(time));
+        return "Pomodoro " + format.format(new Date(time));
+    }
+
+    public String getEndTimeDate() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
+        return format.format(new Date(pomodoroEndTime));
+    }
+
+    public String getOverallProgress() {
+        long totalTime = pomodoroTime * pomodorosToLongBreak +
+                shortBreakTime * (pomodorosToLongBreak - 1) +
+                longBreakTime;
+        int progress = (int) (((pomodoroTotalTime + 0.0)/totalTime) * 100);
+        return Integer.toString(progress) + "%";
     }
 
 }
