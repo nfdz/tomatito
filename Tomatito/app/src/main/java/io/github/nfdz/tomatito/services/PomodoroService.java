@@ -5,10 +5,12 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 
-import io.github.nfdz.tomatito.data.PreferencesUtils;
-import io.github.nfdz.tomatito.utils.NotificationUtils;
 import io.github.nfdz.tomatito.utils.PomodoroUtils;
 
+/**
+ * This service manages ongoing pomodoro in an asynchronous and safe way.
+ * It uses intent action to resolve the operation to perform.
+ */
 public class PomodoroService extends IntentService {
 
     public static final String STOP_POMODORO = "stop";

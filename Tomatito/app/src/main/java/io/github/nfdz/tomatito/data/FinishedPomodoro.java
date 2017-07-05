@@ -7,6 +7,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+/**
+ * Finished pomodoro immutable data pojo class.
+ */
 public class FinishedPomodoro {
 
     public final String name;
@@ -17,6 +20,16 @@ public class FinishedPomodoro {
     public final long longBreakTime;
     public final int pomodorosToLongBreak;
 
+    /**
+     * Default constructor.
+     * @param name
+     * @param pomodoroTotalTime
+     * @param pomodoroEndTime
+     * @param pomodoroTime
+     * @param shortBreakTime
+     * @param longBreakTime
+     * @param pomodorosToLongBreak
+     */
     public FinishedPomodoro(String name,
                             long pomodoroTotalTime,
                             long pomodoroEndTime,
@@ -33,6 +46,11 @@ public class FinishedPomodoro {
         this.pomodorosToLongBreak = pomodorosToLongBreak;
     }
 
+    /**
+     * Database cursor constructor. It assumes that cursor is pointing valid data and that
+     * has the default projection.
+     * @param cursor
+     */
     public FinishedPomodoro(Cursor cursor) {
         // assume that it has default projection
         this.name = cursor.getString(Contract.PomodoroEntry.POSITION_NAME);
@@ -44,6 +62,10 @@ public class FinishedPomodoro {
         this.pomodorosToLongBreak = cursor.getInt(Contract.PomodoroEntry.POSITION_POMODOROS_TO_LONG_BREAK);
     }
 
+    /**
+     * This method processes all attributes in to a content values object.
+     * @return
+     */
     public ContentValues getContentValues() {
         ContentValues values = new ContentValues();
         values.put(Contract.PomodoroEntry.COLUMN_NAME, name);
@@ -56,6 +78,12 @@ public class FinishedPomodoro {
         return values;
     }
 
+    /**
+     * This static method builds a finished pomodoro with the given ongoing pomodoro and end time.
+     * @param pomodoro
+     * @param endTime UTC
+     * @return
+     */
     public static FinishedPomodoro buildFinishedPomodoro(Pomodoro pomodoro, long endTime) {
         if (pomodoro.pomodoroStartTime >= endTime) {
             throw new IllegalArgumentException("Pomodoro start time is in the future");
@@ -71,16 +99,29 @@ public class FinishedPomodoro {
                 pomodoro.pomodorosToLongBreak);
     }
 
+    /**
+     * Gets the default name with the given time. It is like "Pomodoro 10:05".
+     * @param time
+     * @return
+     */
     public static String getDefaultName(long time) {
         SimpleDateFormat format = new SimpleDateFormat("HH:mm", Locale.getDefault());
         return "Pomodoro " + format.format(new Date(time));
     }
 
+    /**
+     * Gets the end time date formatted with the default format. It is like "1999/12/31".
+     * @return
+     */
     public String getEndTimeDate() {
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
         return format.format(new Date(pomodoroEndTime));
     }
 
+    /**
+     * Gets the overall percentage progress of the finished pomodoro. It is like "55%".
+     * @return
+     */
     public String getOverallProgress() {
         long totalTime = pomodoroTime * pomodorosToLongBreak +
                 shortBreakTime * (pomodorosToLongBreak - 1) +

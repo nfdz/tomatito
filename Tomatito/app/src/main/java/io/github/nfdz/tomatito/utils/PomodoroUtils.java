@@ -5,7 +5,6 @@ package io.github.nfdz.tomatito.utils;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.provider.ContactsContract;
 import android.support.annotation.IntDef;
 
 import java.lang.annotation.Retention;
@@ -18,6 +17,7 @@ import io.github.nfdz.tomatito.data.PreferencesUtils;
 
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
+/** This class has methods to ease work with pomodoro operations. */
 public class PomodoroUtils {
 
     private PomodoroUtils() { }
@@ -46,6 +46,11 @@ public class PomodoroUtils {
         public int breakCounter;
     }
 
+    /**
+     * This method computes pomodoro state for the given ongoing pomodoro.
+     * @param pomodoro
+     * @return
+     */
     public static PomodoroState getPomodoroState(Pomodoro pomodoro) {
         long currentTime = System.currentTimeMillis();
 
@@ -119,6 +124,12 @@ public class PomodoroUtils {
         return minutes + ":" + seconds;
     }
 
+    /**
+     * This method checks if the given ongoing pomodoro is valid. It uses system current time
+     * millis to get current time and check if pomodoro UTC start time is still valid.
+     * @param pomodoro
+     * @return true if it is valid, false if not.
+     */
     public static boolean isValid(Pomodoro pomodoro) {
         boolean isDefault = pomodoro.pomodoroStartTime == PreferencesUtils.POMODORO_START_TIME_DEFAULT;
         if (!isDefault) {
@@ -129,6 +140,7 @@ public class PomodoroUtils {
         return false;
     }
 
+    /** This method computes expected end time for the given ongoing pomodoro. */
     public static long getExpectedEndTime(Pomodoro pomodoro) {
         long endTime = pomodoro.pomodoroStartTime +
                 pomodoro.pomodoroTime * pomodoro.pomodorosToLongBreak +
@@ -137,6 +149,12 @@ public class PomodoroUtils {
         return endTime;
     }
 
+    /**
+     * This method manages the initialization of a new pomodoro now. It performs serveral operations
+     * like store, schedule alarm and notification.
+     *
+     * @param context
+     */
     public static void startPomodoro(Context context) {
         AlarmUtils.disableAlarm(context);
         long now = System.currentTimeMillis();
@@ -145,6 +163,10 @@ public class PomodoroUtils {
         NotificationUtils.notifyWork(context);
     }
 
+    /**
+     * This method manages the stop of current ongoing pomodoro.
+     * @param context
+     */
     public static void stopPomodoro(Context context) {
         Pomodoro currentPomodoro = PreferencesUtils.getPomodoro(context);
         if (currentPomodoro.pomodoroStartTime != PreferencesUtils.POMODORO_START_TIME_DEFAULT) {

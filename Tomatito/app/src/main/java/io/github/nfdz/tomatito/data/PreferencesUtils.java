@@ -10,14 +10,20 @@ import android.preference.PreferenceManager;
 import java.util.concurrent.TimeUnit;
 
 import io.github.nfdz.tomatito.R;
-import io.github.nfdz.tomatito.utils.AlarmUtils;
 
 /**
- * This class has static methods to ease work with shared preferences
+ * This class has static methods to ease work with shared preferences.
  */
 public class PreferencesUtils {
 
+    /**
+     * This preference is not a user preference, it is used to store the start time
+     * of the ongoing pomodoro.
+     */
     public static final String POMODORO_START_TIME_KEY = "current-pomodoro";
+    /**
+     * Default value of ongoing pomodoro start time. It means that there is no ongoing pomodoro.
+     */
     public static final long POMODORO_START_TIME_DEFAULT = -1;
 
     public static long getPomodoroStartTime(Context context) {
@@ -32,6 +38,10 @@ public class PreferencesUtils {
         editor.apply();
     }
 
+    /**
+     * Removes stored ongoing pomodoro start time and sets its value to the default one.
+     * @param context
+     */
     public static void deletePomodoro(Context context) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = sp.edit();
@@ -71,6 +81,12 @@ public class PreferencesUtils {
         return sp.getInt(key, defaultValue);
     }
 
+    /**
+     * Gets stored ongoing pomodoro. If there is no ongoing pomodoro, this method will not
+     * fail but it will return a pomodoro with a wrong start time value.
+     * @param context
+     * @return
+     */
     public static Pomodoro getPomodoro(Context context) {
         long pomodoroStartTime = getPomodoroStartTime(context);
         int pomodorosToLongBreak = PreferencesUtils.getPomodorosToLongBreak(context);
@@ -98,6 +114,11 @@ public class PreferencesUtils {
         return sp.getBoolean(key, defaultValue);
     }
 
+    /**
+     * This method restores default preferences of a pomodoro. It is
+     * working time, short break time, long break time and pomodoros to long break.
+     * @param context
+     */
     public static void restoreDefaultPomodoroPrefs(Context context) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = sp.edit();

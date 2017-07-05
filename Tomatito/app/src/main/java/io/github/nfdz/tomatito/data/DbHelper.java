@@ -4,6 +4,9 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+/**
+ * SQL database helper.
+ */
 public class DbHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "tomatito.db";

@@ -16,6 +16,9 @@ import io.github.nfdz.tomatito.data.PreferencesUtils;
 import io.github.nfdz.tomatito.services.AlarmService;
 import timber.log.Timber;
 
+/**
+ * This class has methods to ease work with alarm manager.
+ */
 public class AlarmUtils {
 
     private static boolean sInitialized = false;
@@ -78,6 +81,10 @@ public class AlarmUtils {
         }
     }
 
+    /**
+     * This method disables any type of alarm that could be set in alarm manager.
+     * @param context
+     */
     public static void disableAlarm(@NonNull Context context) {
         AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 

@@ -3,6 +3,9 @@
  */
 package io.github.nfdz.tomatito.data;
 
+/**
+ * Ongoing pomodoro immutable data pojo class.
+ */
 public class Pomodoro {
 
     public final long pomodoroStartTime;

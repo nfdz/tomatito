@@ -3,7 +3,6 @@
  */
 package io.github.nfdz.tomatito.ui;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -40,11 +39,6 @@ public class MainActivity extends AppCompatActivity implements ActionMenuView.On
     private PagerListener mPagerListener = new PagerListener();
     private ScreenSlidePagerAdapter mPagerAdapter;
 
-    public static void start(Context context) {
-        Intent starter = new Intent(context, MainActivity.class);
-        context.startActivity(starter);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements ActionMenuView.On
     }
 
     /**
-     * Checks if there is a pomodoro pending to be stored.
+     * Checks if there is an ongoing pomodoro pending to be stored.
      */
     private void checkPendingPomodoro() {
         Pomodoro pomodoro = PreferencesUtils.getPomodoro(this);

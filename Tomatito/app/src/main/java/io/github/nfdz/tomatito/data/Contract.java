@@ -6,10 +6,17 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * This class contains all database table definitions.
+ */
 public class Contract {
 
+    /**
+     * Pomodoro records table.
+     */
     public static final class PomodoroEntry implements BaseColumns {
 
+        /** Database table name */
         public static final String TABLE_NAME = "pomodoros";
 
         /** Stored as string. */
@@ -33,6 +40,7 @@ public class Contract {
         /** Stored as integer. */
         public static final String COLUMN_POMODOROS_TO_LONG_BREAK = "pomodoros_to_long_break";
 
+        /** SQL create table sentence */
         public static final String SQL_CREATE_TABLE = "CREATE TABLE "  + TABLE_NAME + " (" +
                 _ID                               + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_NAME                       + " TEXT NOT NULL, " +
@@ -53,6 +61,7 @@ public class Contract {
         public static final int POSITION_LONG_BREAK_TIME = 6;
         public static final int POSITION_POMODOROS_TO_LONG_BREAK = 7;
 
+        /** Default projection with all columns */
         public static final List<String> COLUMNS = Collections.unmodifiableList(Arrays.asList(
                 _ID,
                 COLUMN_NAME,

@@ -15,6 +15,9 @@ import io.github.nfdz.tomatito.R;
 import io.github.nfdz.tomatito.data.Contract;
 import io.github.nfdz.tomatito.data.FinishedPomodoro;
 
+/**
+ * Pomodoro records recycler view adapter.
+ */
 public class PomodoroAdapter extends
         RecyclerView.Adapter<PomodoroAdapter.PomodoroHolder> {
 

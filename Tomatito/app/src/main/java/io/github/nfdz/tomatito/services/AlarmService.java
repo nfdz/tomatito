@@ -1,15 +1,17 @@
 package io.github.nfdz.tomatito.services;
 
 import android.app.IntentService;
-import android.content.Context;
 import android.content.Intent;
-import android.os.Vibrator;
 
 import io.github.nfdz.tomatito.data.PreferencesUtils;
 import io.github.nfdz.tomatito.utils.AlarmUtils;
 import io.github.nfdz.tomatito.utils.NotificationUtils;
 import timber.log.Timber;
 
+/**
+ * This service is triggered by Alarm Manager and it will send a notification.
+ * It uses intent action to resolve the type of the notification.
+ */
 public class AlarmService extends IntentService {
 
     public static final String WORK_ALARM = "work";

@@ -7,14 +7,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
-import android.support.v7.app.NotificationCompat;
 import android.support.v4.app.NotificationCompat.Builder;
+import android.support.v7.app.NotificationCompat;
 
 import io.github.nfdz.tomatito.R;
 import io.github.nfdz.tomatito.data.PreferencesUtils;
 import io.github.nfdz.tomatito.services.PomodoroService;
 import io.github.nfdz.tomatito.ui.MainActivity;
 
+/**
+ * This class has methods to ease work with notification manager.
+ */
 public class NotificationUtils {
 
     private static final int NOTIFICATION_ID = 875;

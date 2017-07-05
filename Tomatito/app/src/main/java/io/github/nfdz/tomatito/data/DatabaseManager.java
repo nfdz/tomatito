@@ -8,8 +8,17 @@ import android.support.annotation.AnyThread;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+/**
+ * This class manages all operations with the database.
+ * As this is a small application and the database is not expected to escalate or become more
+ * important in the future, this manager will be used to manage reading and writing in the database
+ * (instead of a content provider that is usually the best choice)
+ */
 public class DatabaseManager {
 
+    /**
+     * This interface must be implemented in order to be notified when database changes.
+     */
     public interface DatabaseListener {
         @AnyThread
         void notifyChanges();
@@ -48,6 +57,10 @@ public class DatabaseManager {
         }
     }
 
+    /**
+     * This method retrieves all pomodoro records stored in database.
+     * @return Cursor
+     */
     public Cursor queryAllPomodoros() {
         String table = Contract.PomodoroEntry.TABLE_NAME;
         String[] columns = Contract.PomodoroEntry.COLUMNS.toArray(new String[]{});
@@ -66,6 +79,10 @@ public class DatabaseManager {
                 orderBy);
     }
 
+    /**
+     * This method inserts a pomodoro record in database.
+     * @param pomodoro
+     */
     public void insertPomodoro(FinishedPomodoro pomodoro) {
         mDbHelper.getWritableDatabase().insert(Contract.PomodoroEntry.TABLE_NAME,
                 null,
@@ -74,6 +91,12 @@ public class DatabaseManager {
         notifyListeners();
     }
 
+    /**
+     * This method edits a pomodoro record name with the given one.
+     * @param id
+     * @param pomodoro
+     * @param name
+     */
     public void editPomodoroName(long id, FinishedPomodoro pomodoro, String name) {
         ContentValues values = pomodoro.getContentValues();
         values.put(Contract.PomodoroEntry.COLUMN_NAME, name);
@@ -88,11 +111,18 @@ public class DatabaseManager {
         notifyListeners();
     }
 
+    /**
+     * This method removes all stored pomodoros.
+     */
     public void removeAllPomodoros() {
         mDbHelper.getWritableDatabase().delete(Contract.PomodoroEntry.TABLE_NAME, null, null);
         notifyListeners();
     }
 
+    /**
+     * This method removes all old pomodoros in order to grant that database do not surpasses
+     * preferred storage limit.
+     */
     public void purgePomodoros() {
         purgePomodoros(true);
     }
