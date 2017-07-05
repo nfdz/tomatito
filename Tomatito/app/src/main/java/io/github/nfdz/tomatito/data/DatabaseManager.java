@@ -98,9 +98,18 @@ public class DatabaseManager {
     }
 
     private void purgePomodoros(boolean notify) {
-        // TODO
+        int limit = PreferencesUtils.getStorageLimit(mContext);
+        String whereClause = Contract.PomodoroEntry._ID +
+                " IN (SELECT " + Contract.PomodoroEntry._ID +
+                " FROM " + Contract.PomodoroEntry.TABLE_NAME +
+                " ORDER BY " + Contract.PomodoroEntry._ID +
+                " DESC LIMIT -1 OFFSET " + limit + ")";
+        String[] whereArgs = null;
+        int rowsAffected = mDbHelper.getWritableDatabase().delete(Contract.PomodoroEntry.TABLE_NAME,
+                whereClause,
+                whereArgs);
 
-        if (notify) {
+        if (notify && rowsAffected > 0) {
             notifyListeners();
         }
     }

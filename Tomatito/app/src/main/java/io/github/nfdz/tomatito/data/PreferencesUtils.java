@@ -120,4 +120,11 @@ public class PreferencesUtils {
 
         editor.apply();
     }
+
+    public static int getStorageLimit(Context context) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        String key = context.getString(R.string.pref_storage_limit_key);
+        int defaultValue = Integer.parseInt(context.getString(R.string.pref_storage_limit_default));
+        return sp.getInt(key, defaultValue);
+    }
 }

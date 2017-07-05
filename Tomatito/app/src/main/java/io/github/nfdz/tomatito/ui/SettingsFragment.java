@@ -84,7 +84,7 @@ public class SettingsFragment extends PreferenceFragment implements
                     .setValue(sharedPreferences.getInt(key, defaultValue));
             PomodoroUtils.stopPomodoro(getActivity());
         } else if (key.equals(getString(R.string.pref_storage_limit_key))) {
-            // TODO
+            DatabaseManager.getInstance(getActivity()).purgePomodoros();
         }
     }
 }
