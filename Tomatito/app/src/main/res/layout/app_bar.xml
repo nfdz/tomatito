@@ -22,7 +22,7 @@
             android:layout_height="?attr/actionBarSize"/>
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/logo_width"
             android:layout_height="@dimen/logo_height"
             android:layout_gravity="center_horizontal"
             android:contentDescription="@string/app_name"

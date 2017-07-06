@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="activity_horizontal_margin">52dp</dimen>
+    <dimen name="activity_vertical_margin">32dp</dimen>
+
+    <dimen name="appbar_height">100dp</dimen>
+    <dimen name="logo_height">58dp</dimen>
+    <dimen name="logo_width">243dp</dimen>
+
+    <dimen name="nav_bottom_height">65dp</dimen>
+
+    <!-- This value depends on appbar_height dimen-->
+    <dimen name="fab_pomodoro_margin_bottom">152dp</dimen>
+    <dimen name="fab_pomodoro_margin_end">52dp</dimen>
+</resources>

@@ -36,7 +36,7 @@ public class NotificationUtils {
                 .setContentTitle(context.getString(title))
                 .setContentText(textString)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(textString))
-                .setSmallIcon(R.drawable.ic_tomato)
+                .setSmallIcon(R.drawable.ic_notification_icon)
                 .setContentIntent(operation)
                 .setAutoCancel(true)
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)

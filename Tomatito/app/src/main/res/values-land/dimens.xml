@@ -4,6 +4,7 @@
 
     <dimen name="appbar_height">55dp</dimen>
     <dimen name="logo_height">35dp</dimen>
+    <dimen name="logo_width">147dp</dimen>
 
     <!-- This value depends on appbar_height dimen-->
     <dimen name="fab_pomodoro_margin_bottom">71dp</dimen>
