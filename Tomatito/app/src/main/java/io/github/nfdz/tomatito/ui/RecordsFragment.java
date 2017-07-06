@@ -215,7 +215,7 @@ public class RecordsFragment extends Fragment implements
         builder.setPositiveButton(R.string.pomodoro_edit_dialog_ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                final String name = input.getText().toString().toLowerCase();
+                final String name = input.getText().toString();
                 if (!TextUtils.isEmpty(name) && !name.equals(pomodoro.name)) {
                     new AsyncTask() {
                         @Override
