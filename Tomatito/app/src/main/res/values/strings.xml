@@ -10,6 +10,9 @@
     <string name="pomodoro_edit_dialog_title">Pomodoro name</string>
     <string name="pomodoro_edit_dialog_ok">Edit</string>
 
+    <string name="unit_minutes">minutes</string>
+    <string name="unit_pomodoros">pomodoros</string>
+
     <!-- Pomodoro fragment strings -->
     <string name="pomodoros_counter_title">Pomodoro:</string>
     <string name="breaks_counter_title">Break:</string>
@@ -41,13 +44,13 @@
 
     <string name="pref_alarm_key" translatable="false">pomodoro-alarm</string>
     <string name="pref_alarm_default" translatable="false">true</string>
-    <string name="pref_alarm_title">Alarm</string>
+    <string name="pref_alarm_title">Notification</string>
     <string name="pref_alarm_summary">Pomodoro events will be alerted by a notification</string>
 
     <string name="pref_vibration_key" translatable="false">pomodoro-vibration</string>
     <string name="pref_vibration_default" translatable="false">true</string>
     <string name="pref_vibration_title">Vibration</string>
-    <string name="pref_vibration_summary">The phone will vibrate several times to alert you of the events</string>
+    <string name="pref_vibration_summary">The device will vibrate several times to alert you of the events</string>
 
     <string name="pref_pomodoro_time_key" translatable="false">pomodoro-work-time</string>
     <string name="pref_pomodoro_time_default" translatable="false">25</string>
@@ -67,7 +70,7 @@
 
     <string name="pref_restore_default_key" translatable="false">restore-default-values</string>
     <string name="pref_restore_default_title">Restore default values</string>
-    <string name="pref_restore_default_summary">The default values are recommended for most people and for all types of tasks</string>
+    <string name="pref_restore_default_summary">The default values are recommended for all types of tasks</string>
 
     <string name="pref_storage_limit_key" translatable="false">storage-limit</string>
     <string name="pref_storage_limit_default" translatable="false">50</string>

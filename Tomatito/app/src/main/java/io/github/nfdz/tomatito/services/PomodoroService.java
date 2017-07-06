@@ -5,6 +5,7 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 
+import io.github.nfdz.tomatito.utils.NotificationUtils;
 import io.github.nfdz.tomatito.utils.PomodoroUtils;
 
 /**
@@ -26,6 +27,7 @@ public class PomodoroService extends IntentService {
         switch(action) {
             case STOP_POMODORO:
                 PomodoroUtils.stopPomodoro(this);
+                NotificationUtils.cancel(this);
                 break;
             case RESTART_POMODORO:
                 PomodoroUtils.startPomodoro(this);

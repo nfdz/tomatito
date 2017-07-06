@@ -29,6 +29,7 @@ import butterknife.OnClick;
 import io.github.nfdz.tomatito.R;
 import io.github.nfdz.tomatito.data.Pomodoro;
 import io.github.nfdz.tomatito.data.PreferencesUtils;
+import io.github.nfdz.tomatito.utils.NotificationUtils;
 import io.github.nfdz.tomatito.utils.PomodoroUtils;
 
 public class PomodoroFragment extends Fragment implements SharedPreferences.OnSharedPreferenceChangeListener {
@@ -113,7 +114,8 @@ public class PomodoroFragment extends Fragment implements SharedPreferences.OnSh
 
     @OnClick(R.id.fab_stop_pomodoro)
     void stopPomodoro() {
-        PomodoroUtils.stopPomodoro(getContext());
+        PomodoroUtils.stopPomodoro(getActivity());
+        NotificationUtils.cancel(getActivity());
     }
 
     private void initPomodoro(Pomodoro pomodoro) {

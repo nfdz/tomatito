@@ -174,7 +174,6 @@ public class PomodoroUtils {
         }
         PreferencesUtils.deletePomodoro(context);
         AlarmUtils.disableAlarm(context);
-        NotificationUtils.cancel(context);
     }
 
     public static void storePomodoroAsync(final Context context, final Pomodoro pomodoro) {

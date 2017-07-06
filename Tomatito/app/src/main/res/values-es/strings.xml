@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Tomatito</string>
+
+    <string name="navigation_title_pomodoro">Pomodoro</string>
+    <string name="navigation_title_records">Registro</string>
+
+    <string name="action_settings">Configuración</string>
+    <string name="action_back">Volver</string>
+
+    <string name="pomodoro_edit_dialog_title">Nombre del Pomodoro</string>
+    <string name="pomodoro_edit_dialog_ok">Editar</string>
+
+    <string name="unit_minutes">minutos</string>
+    <string name="unit_pomodoros">pomodoros</string>
+
+    <!-- Pomodoro fragment strings -->
+    <string name="pomodoros_counter_title">Pomodoro:</string>
+    <string name="breaks_counter_title">Descanso:</string>
+
+    <!-- Records fragment strings -->
+    <string name="no_records_message">No hay ningún registro todavía</string>
+    <string name="loading_records_description">Cargando registro de pomodoros</string>
+
+    <!-- Notification strings -->
+    <string name="notification_title_work">Pomodoro: Trabaja</string>
+    <string name="notification_text_work">Es hora de volver al trabajo</string>
+    <string name="notification_title_short_break">Pomodoro: Descanso Corto</string>
+    <string name="notification_text_short_break">Toma un descanso corto del trabajo</string>
+    <string name="notification_title_long_break">Pomodoro: Descanso Largo</string>
+    <string name="notification_text_long_break">Toma un descanso largo del trabajo</string>
+    <string name="notification_title_end">Pomodoro: Fin</string>
+    <string name="notification_text_end">Enhorabuena, ¡Has finalizado el pomodoro con éxito!</string>
+
+    <string name="notification_action_stop">Parar pomodoro</string>
+    <string name="notification_action_restart">Reiniciar pomodoro</string>
+
+    <!-- Preferences strings -->
+    <string name="prefs_pomodoro_title">Pomodoro</string>
+    <string name="prefs_alarm_title">Alarma</string>
+    <string name="prefs_storage_title">Almacenamiento</string>
+
+    <string name="pref_alarm_title">Notificación</string>
+    <string name="pref_alarm_summary">Los eventos del pomodoro serán alertados mediante notificaciones</string>
+
+    <string name="pref_vibration_title">Vibración</string>
+    <string name="pref_vibration_summary">El dispositivo vibrará varias veces para alertar de la notificación del pomodoro</string>
+
+    <string name="pref_pomodoro_time_title">Tiempo de trabajo</string>
+    <string name="pref_short_break_time_title">Tiempo de descanso corto</string>
+    <string name="pref_long_break_time_title">Tiempo de descanso largo</string>
+    <string name="pref_pomodoros_to_long_break_title">Pomodoros para descanso largo</string>
+    <string name="pref_restore_default_title">Restaurar los valores por defecto</string>
+    <string name="pref_restore_default_summary">Los valores por defecto son recomendados para todo tipo de tareas y trabajos</string>
+    <string name="pref_storage_limit_title">Límite de almacenamiento</string>
+    <string name="pref_storage_clear_title">Limpiar almacenamiento</string>
+    <string name="pref_storage_clear_summary">Todos los registros de pomodoros seran eliminados</string>
+</resources>

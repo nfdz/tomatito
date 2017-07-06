@@ -12,7 +12,7 @@
             android:defaultValue="@string/pref_pomodoro_time_default"
             app:min_number="5"
             app:max_number="60"
-            app:summary_suffix="minutes" />
+            app:summary_suffix="@string/unit_minutes" />
 
         <io.github.nfdz.tomatito.ui.NumberPickerPreference
             android:key="@string/pref_short_break_time_key"
@@ -20,7 +20,7 @@
             android:defaultValue="@string/pref_short_break_time_default"
             app:min_number="2"
             app:max_number="60"
-            app:summary_suffix="minutes" />
+            app:summary_suffix="@string/unit_minutes" />
 
         <io.github.nfdz.tomatito.ui.NumberPickerPreference
             android:key="@string/pref_long_break_time_key"
@@ -28,7 +28,7 @@
             android:defaultValue="@string/pref_long_break_time_default"
             app:min_number="5"
             app:max_number="60"
-            app:summary_suffix="minutes" />
+            app:summary_suffix="@string/unit_minutes" />
 
         <io.github.nfdz.tomatito.ui.NumberPickerPreference
             android:key="@string/pref_pomodoros_to_long_break_key"
@@ -36,7 +36,7 @@
             android:defaultValue="@string/pref_pomodoros_to_long_break_default"
             app:min_number="2"
             app:max_number="15"
-            app:summary_suffix="pomodoros" />
+            app:summary_suffix="@string/unit_pomodoros" />
 
         <Preference
             android:title="@string/pref_restore_default_title"
@@ -56,7 +56,7 @@
             android:defaultValue="@string/pref_storage_limit_default"
             app:min_number="5"
             app:max_number="500"
-            app:summary_suffix="pomodoros" />
+            app:summary_suffix="@string/unit_pomodoros" />
 
         <Preference
             android:title="@string/pref_storage_clear_title"

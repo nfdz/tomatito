@@ -10,6 +10,7 @@ import io.github.nfdz.tomatito.R;
 import io.github.nfdz.tomatito.data.DatabaseManager;
 import io.github.nfdz.tomatito.data.PreferencesUtils;
 import io.github.nfdz.tomatito.utils.AlarmUtils;
+import io.github.nfdz.tomatito.utils.NotificationUtils;
 import io.github.nfdz.tomatito.utils.PomodoroUtils;
 
 public class SettingsFragment extends PreferenceFragment implements
@@ -68,21 +69,25 @@ public class SettingsFragment extends PreferenceFragment implements
             ((NumberPickerPreference) findPreference(key))
                     .setValue(sharedPreferences.getInt(key, defaultValue));
             PomodoroUtils.stopPomodoro(getActivity());
+            NotificationUtils.cancel(getActivity());
         } else if (key.equals(getString(R.string.pref_short_break_time_key))) {
             int defaultValue = Integer.parseInt(getString(R.string.pref_short_break_time_default));
             ((NumberPickerPreference) findPreference(key))
                     .setValue(sharedPreferences.getInt(key, defaultValue));
             PomodoroUtils.stopPomodoro(getActivity());
+            NotificationUtils.cancel(getActivity());
         } else if (key.equals(getString(R.string.pref_long_break_time_key))) {
             int defaultValue = Integer.parseInt(getString(R.string.pref_long_break_time_default));
             ((NumberPickerPreference) findPreference(key))
                     .setValue(sharedPreferences.getInt(key, defaultValue));
             PomodoroUtils.stopPomodoro(getActivity());
+            NotificationUtils.cancel(getActivity());
         } else if (key.equals(getString(R.string.pref_pomodoros_to_long_break_key))) {
             int defaultValue = Integer.parseInt(getString(R.string.pref_pomodoros_to_long_break_default));
             ((NumberPickerPreference) findPreference(key))
                     .setValue(sharedPreferences.getInt(key, defaultValue));
             PomodoroUtils.stopPomodoro(getActivity());
+            NotificationUtils.cancel(getActivity());
         } else if (key.equals(getString(R.string.pref_storage_limit_key))) {
             DatabaseManager.getInstance(getActivity()).purgePomodoros();
         }
