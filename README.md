@@ -6,6 +6,19 @@ Android application implementation of pomodoro timer. I like this technique, I u
   <img src="dev/logo_icon.png?raw=true" alt="Tomatito"/>
 </p>
 
+## Screenshots
+
+<p align="center">
+  <img src="screenshots/pomodoro_working.png?raw=true" width="250" alt="Pomodoro working"/>
+  <img src="screenshots/pomodoro_short_break.png?raw=true" width="250" alt="Pomodoro short break"/>
+  <img src="screenshots/pomodoro_long_break.png?raw=true" width="250" alt="Pomodoro long break"/>
+</p>
+<p align="center">
+  <img src="screenshots/pomodoro_end.png?raw=true" width="250" alt="Pomodoro End"/>
+  <img src="screenshots/records.png?raw=true" width="250" alt="Records"/>
+  <img src="screenshots/settings.png?raw=true" width="250" alt="Settings"/>
+</p>
+
 ## TODO
 * Implement pomodoro record details feature (short click)
 * Implement pause feature
