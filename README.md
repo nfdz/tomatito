@@ -6,6 +6,12 @@ Android application implementation of pomodoro timer. I like this technique, I u
   <img src="dev/logo_icon.png?raw=true" alt="Tomatito"/>
 </p>
 
+## Download
+
+<p align="center"><a href="https://github.com/nfdz/tomatito/releases">
+  <img width="250" src="dev/githubBadge.png?raw=true" alt="Get it on Github"/>
+</a></p>
+
 ## Screenshots
 
 <p align="center">
