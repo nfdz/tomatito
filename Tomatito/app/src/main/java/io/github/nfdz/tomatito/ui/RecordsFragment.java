@@ -196,12 +196,7 @@ public class RecordsFragment extends Fragment implements
     }
 
     @Override
-    public void onClick(long id, FinishedPomodoro pomodoro) {
-        // TODO show more information about pomodoro
-    }
-
-    @Override
-    public void onLongClick(final long id, final FinishedPomodoro pomodoro) {
+    public void onClick(final long id, final FinishedPomodoro pomodoro) {
         // Edit pomodoro name
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.pomodoro_edit_dialog_title);
@@ -237,5 +232,28 @@ public class RecordsFragment extends Fragment implements
         });
 
         builder.show();
+    }
+
+    @Override
+    public void onLongClick(final long id, FinishedPomodoro pomodoro) {
+        // Remove pomodoro
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(R.string.pomodoro_delete_dialog_title);
+        builder.setMessage(R.string.pomodoro_delete_dialog_message);
+        builder.setPositiveButton(R.string.pomodoro_delete_dialog_ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                new AsyncTask() {
+                    @Override
+                    protected Object doInBackground(Object[] params) {
+                        DatabaseManager.getInstance(getActivity()).deletePomodoro(id);
+                        return null;
+                    }
+                }.execute();
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton(android.R.string.cancel, null);
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

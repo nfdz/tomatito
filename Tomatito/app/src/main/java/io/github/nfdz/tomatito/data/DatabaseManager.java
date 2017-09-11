@@ -111,6 +111,16 @@ public class DatabaseManager {
         notifyListeners();
     }
 
+    public void deletePomodoro(long id) {
+        String whereClause = Contract.PomodoroEntry._ID + " = ? ";
+        String[] whereArgs = new String[]{ Long.toString(id) };
+
+        mDbHelper.getWritableDatabase().delete(Contract.PomodoroEntry.TABLE_NAME,
+                whereClause,
+                whereArgs);
+        notifyListeners();
+    }
+
     /**
      * This method removes all stored pomodoros.
      */
