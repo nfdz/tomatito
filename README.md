@@ -1,3 +1,5 @@
+# <span style="color:blue">This application is discontinued. It is possible that some things does not work properly. I keep this repository for historical and educational purposes. Please, if you are interested, visit the new development repository: https://github.com/nfdz/tomatina</span>
+
 # Tomatito
 
 Android application implementation of pomodoro timer. I like this technique, I use it a lot while I work and I do any kind of task.
