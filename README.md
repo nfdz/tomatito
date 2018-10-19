@@ -1,5 +1,12 @@
-# This application is discontinued. It is possible that some things does not work properly. I keep this repository for historical and educational purposes. Please, if you are interested, visit the new development repository: https://github.com/nfdz/tomatina
+# Warning
 
+This application is discontinued. It is possible that some things does not work properly. I keep this repository for historical and educational purposes. Please, if you are interested, visit the new development repository: **https://github.com/nfdz/tomatime**
+
+<p align="center">
+  <img src="dev/new_promo.jpg?raw=true" alt="Tomatime"/>
+</p>
+
+---
 ---
 
 # Tomatito
@@ -7,7 +14,7 @@
 Android application implementation of pomodoro timer. I like this technique, I use it a lot while I work and I do any kind of task.
 
 <p align="center">
-  <img src="dev/logo_icon.png?raw=true" alt="Tomatito"/>
+  <img width="250" src="dev/logo_icon.png?raw=true" alt="Tomatito"/>
 </p>
 
 ## Download
