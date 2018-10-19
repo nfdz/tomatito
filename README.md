@@ -2,9 +2,9 @@
 
 This application is discontinued. It is possible that some things does not work properly. I keep this repository for historical and educational purposes. Please, if you are interested, visit the new development repository: **https://github.com/nfdz/tomatime**
 
-<p align="center">
+<p align="center"><a href="https://github.com/nfdz/tomatime">
   <img src="dev/new_promo.jpg?raw=true" alt="Tomatime"/>
-</p>
+</a></p>
 
 ---
 ---
