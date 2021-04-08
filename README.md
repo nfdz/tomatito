@@ -9,7 +9,7 @@ This repository is just for educational purposes. If you are interested, visit t
 
 # Tomatito
 
-Android pomodoro timer..
+Android pomodoro timer.
 
 <p align="center">
   <img width="250" src="dev/logo_icon.png?raw=true" alt="Tomatito"/>
