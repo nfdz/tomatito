@@ -1,17 +1,15 @@
 
 ⚠️  **This project has been discontinued** ⚠️
 
-This repository is just for educational purposes. If you are interested, visit the continuation project [Tomatime](https://github.com/nfdz/tomatime).
+This repository is just for educational purposes. If you are interested, visit the continuation project: [Tomatime](https://github.com/nfdz/tomatime).
 
 <p align="center"><a href="https://github.com/nfdz/tomatime">
   <img width="350" src="dev/new_promo.jpg?raw=true" alt="Tomatime"/>
 </a></p>
 
----
-
 # Tomatito
 
-Android application implementation of pomodoro timer. I like this technique, I use it a lot while I work and I do any kind of task.
+Android pomodoro timer..
 
 <p align="center">
   <img width="250" src="dev/logo_icon.png?raw=true" alt="Tomatito"/>
